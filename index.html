@@ -536,11 +536,20 @@
         }
 
         .nav-actions a img.nav-icon-img {
-            filter: invert(1);
+            filter: invert(0);
         }
 
         [data-theme="light"] .nav-actions a img.nav-icon-img {
             filter: invert(0);
+        }
+
+        :root:not([data-theme]), [data-theme="dark"] {
+            --github-icon-filter: invert(1);
+        }
+
+        :root:not([data-theme]) .nav-actions a img.nav-icon-img,
+        [data-theme="dark"] .nav-actions a img.nav-icon-img {
+            filter: invert(1);
         }
 
         /* Hero Section */
@@ -958,6 +967,11 @@
             filter: invert(0.7);
         }
 
+        :root:not([data-theme]) .contact-icon img,
+        [data-theme="dark"] .contact-icon img {
+            filter: invert(1);
+        }
+
         .contact-card h3 {
             font-weight: 600;
             margin-bottom: 0.5rem;
@@ -1002,7 +1016,7 @@
         .gallery-nav {
             position: absolute;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translateY(-50%) scale(0.9);
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
@@ -1016,13 +1030,17 @@
             justify-content: center;
             transition: all 0.3s;
             z-index: 10;
+            opacity: 0.6;
         }
 
+        .gallery-slider:hover .gallery-nav,
         .gallery-nav:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
+            opacity: 1;
+            transform: translateY(-50%) scale(1);
+            background: var(--accent);
+            border-color: var(--accent);
         }
+
 
         .gallery-nav.prev {
             left: 1rem;
@@ -1062,66 +1080,9 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
         }
 
-        /* Gallery Expand Button */
-        .gallery-expand-btn {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 15;
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(0.9);
-        }
 
-        .gallery-slider:hover .gallery-expand-btn {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1);
-        }
+        /* Fullscreen / lightbox removed (requested) */
 
-        .gallery-expand-btn:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            transform: scale(1.1);
-        }
-
-        /* Gallery Lightbox (expanded view with blur) */
-        .gallery-lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 10, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .gallery-lightbox.active {
-            opacity: 1;
-            visibility: visible;
-        }
 
         .lightbox-content {
             position: relative;
@@ -1130,10 +1091,6 @@
             max-height: 85vh;
             transform: scale(0.9);
             transition: transform 0.3s ease;
-        }
-
-        .gallery-lightbox.active .lightbox-content {
-            transform: scale(1);
         }
 
         .lightbox-slider {
@@ -1259,31 +1216,6 @@
             transform: scale(1.2);
         }
 
-        @media (max-width: 768px) {
-
-            .gallery-expand-btn {
-                opacity: 1;
-                visibility: visible;
-                transform: scale(1);
-            }
-
-            .lightbox-nav.prev {
-                left: 0.5rem;
-            }
-
-            .lightbox-nav.next {
-                right: 0.5rem;
-            }
-
-            .lightbox-content {
-                width: 95%;
-            }
-
-            .lightbox-close {
-                top: -45px;
-                right: 0;
-            }
-        }
 
         /* Footer */
         footer {
@@ -1480,33 +1412,6 @@
                 font-size: 0.9rem;
             }
 
-            .lightbox-content {
-                width: 96%;
-                max-height: 90vh;
-            }
-
-            .lightbox-close {
-                top: -40px;
-                width: 36px;
-                height: 36px;
-            }
-
-            .lightbox-nav {
-                width: 40px;
-                height: 40px;
-            }
-
-            .lightbox-nav.prev {
-                left: 0.25rem;
-            }
-
-            .lightbox-nav.next {
-                right: 0.25rem;
-            }
-
-            .lightbox-dots {
-                margin-top: 1rem;
-            }
         }
 
         /* Extra small mobile */
@@ -1777,15 +1682,8 @@
         <h2 class="section-title">Server Preview</h2>
         <p class="section-subtitle">Check out some screenshots from our amazing server</p>
         
-        <div class="gallery-container">
+        <div class="gallery-container" id="galleryContainer">
             <div class="gallery-slider" id="gallerySlider">
-                <button class="gallery-expand-btn" onclick="openLightbox()" title="Expand view">
-                    <!-- CoreUI Fullscreen Icon -->
-                    <svg viewBox="0 0 512 512" width="20" height="20">
-                        <polygon fill="currentColor" points="208 48 208 16 16 16 16 208 48 208 48 70.627 208.687 231.313 231.313 208.687 70.627 48 208 48"></polygon>
-                        <polygon fill="currentColor" points="464 304 464 441.373 299.313 276.687 276.687 299.313 441.373 464 304 464 304 496 496 496 496 304 464 304"></polygon>
-                    </svg>
-                </button>
                 <div class="gallery-track" id="galleryTrack">
                     <div class="gallery-slide video-slide" data-video="true">
                         <iframe src="https://www.youtube.com/embed/UcNDuYcZVGo?vq=hd1080" title="Server Preview Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -1798,13 +1696,13 @@
                     </div>
                 </div>
             </div>
-            <button class="gallery-nav prev" onclick="prevSlide()">
+            <button class="gallery-nav prev" onclick="prevSlide()" aria-label="Previous slide">
                 <!-- CoreUI Chevron Left Icon -->
                 <svg viewBox="0 0 512 512" width="24" height="24">
                     <path fill="currentColor" d="M327.086,496.89l-142.6-142.6-11.258-11.15-85.6-85.6.054-.054,11.259-11.367,85.5-85.5.054.054,142.6-142.595L424,114.989,281.506,257.483,424,399.978ZM184.64,309.3l11.266,11.159,131.18,131.181,51.658-51.658L236.251,257.483,378.744,114.989,327.086,63.331,184.694,205.725l-.054-.054-51.813,51.812Z"></path>
                 </svg>
             </button>
-            <button class="gallery-nav next" onclick="nextSlide()">
+            <button class="gallery-nav next" onclick="nextSlide()" aria-label="Next slide">
                 <!-- CoreUI Chevron Right Icon -->
                 <svg viewBox="0 0 512 512" width="24" height="24">
                     <path fill="currentColor" d="M184.914,496.89l142.6-142.6,11.258-11.15,85.6-85.6-.054-.054-11.259-11.367-85.5-85.5-.054.054L184.914,17.978,88,114.989l142.494,142.494L88,399.978ZM327.36,309.3l-11.266,11.159L184.914,451.64l-51.658-51.658L275.749,257.483,133.256,114.989l51.658-51.658L327.306,205.725l.054-.054,51.813,51.812Z"></path>
@@ -1813,32 +1711,6 @@
             <div class="gallery-dots" id="galleryDots"></div>
         </div>
     </section>
-
-    <!-- Gallery Lightbox -->
-    <div class="gallery-lightbox" id="galleryLightbox">
-        <div class="lightbox-content">
-            <button class="lightbox-close" onclick="closeLightbox()">
-                <!-- CoreUI X Icon -->
-                <svg viewBox="0 0 512 512" width="20" height="20">
-                    <polygon fill="currentColor" points="438.627 118.627 393.373 73.373 256 210.746 118.627 73.373 73.373 118.627 210.746 256 73.373 393.373 118.627 438.627 256 301.254 393.373 438.627 438.627 393.373 301.254 256 438.627 118.627"></polygon>
-                </svg>
-            </button>
-            <div class="lightbox-slider">
-                <div class="lightbox-track" id="lightboxTrack"></div>
-            </div>
-            <button class="lightbox-nav prev" onclick="lightboxPrev()">
-                <svg viewBox="0 0 512 512" width="24" height="24">
-                    <path fill="currentColor" d="M327.086,496.89l-142.6-142.6-11.258-11.15-85.6-85.6.054-.054,11.259-11.367,85.5-85.5.054.054,142.6-142.595L424,114.989,281.506,257.483,424,399.978ZM184.64,309.3l11.266,11.159,131.18,131.181,51.658-51.658L236.251,257.483,378.744,114.989,327.086,63.331,184.694,205.725l-.054-.054-51.813,51.812Z"></path>
-                </svg>
-            </button>
-            <button class="lightbox-nav next" onclick="lightboxNext()">
-                <svg viewBox="0 0 512 512" width="24" height="24">
-                    <path fill="currentColor" d="M184.914,496.89l142.6-142.6,11.258-11.15,85.6-85.6-.054-.054-11.259-11.367-85.5-85.5-.054.054L184.914,17.978,88,114.989l142.494,142.494L88,399.978ZM327.36,309.3l-11.266,11.159L184.914,451.64l-51.658-51.658L275.749,257.483,133.256,114.989l51.658-51.658L327.306,205.725l.054-.054,51.813,51.812Z"></path>
-                </svg>
-            </button>
-            <div class="lightbox-dots" id="lightboxDots"></div>
-        </div>
-    </div>
 
     <!-- Rules Section -->
     <section id="rules">
@@ -2049,70 +1921,9 @@
             goToSlide(currentSlide);
         }
 
-        // Lightbox functionality - shows the same element expanded
-        const lightbox = document.getElementById('galleryLightbox');
-        const lightboxTrack = document.getElementById('lightboxTrack');
-        const lightboxDotsContainer = document.getElementById('lightboxDots');
 
-        function openLightbox() {
-            // Clear previous content
-            lightboxTrack.innerHTML = '';
-            lightboxDotsContainer.innerHTML = '';
-            
-            // Get the current slide element
-            const currentSlideEl = slides[currentSlide];
-            const lightboxSlideEl = document.createElement('div');
-            
-            if (currentSlideEl.dataset.video === 'true') {
-                const iframe = currentSlideEl.querySelector('iframe');
-                lightboxSlideEl.className = 'lightbox-slide video-slide';
-                // Keep same video settings (unmuted, 1080p)
-                lightboxSlideEl.innerHTML = `<iframe src="${iframe.src}" title="${iframe.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
-            } else {
-                const img = currentSlideEl.querySelector('img');
-                lightboxSlideEl.className = 'lightbox-slide';
-                lightboxSlideEl.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
-            }
-            
-            lightboxTrack.appendChild(lightboxSlideEl);
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+        // Fullscreen / lightbox removed (requested)
 
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function lightboxNext() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            goToSlide(currentSlide);
-            openLightbox();
-        }
-
-        function lightboxPrev() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            goToSlide(currentSlide);
-            openLightbox();
-        }
-
-        // Close lightbox on background click
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-
-        // Close lightbox on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                closeLightbox();
-            }
-            if (lightbox.classList.contains('active')) {
-                if (e.key === 'ArrowRight') lightboxNext();
-                if (e.key === 'ArrowLeft') lightboxPrev();
-            }
-        });
 
         // Initialize
         initTheme();
