@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M Server - Minecraft Server</title>
     <meta name="description" content="Join the M Server Minecraft Server, a vanilla-like survival experience!">
-    <link rel="icon" href="/favicon.png" type="image/png">
+    <link rel="icon" href="https://github.com/Matko802/M-Server-website/blob/main/logos/Black%20And%20White%20Modern%20Vintage%20Retro%20Brand%20Logo.png?raw=true" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -1250,8 +1250,8 @@
 
         .footer-logo-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: 800;
             color: var(--primary);
         }
 
@@ -1259,14 +1259,13 @@
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             flex-wrap: wrap;
         }
 
         .footer-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.875rem;
             transition: color 0.3s;
         }
 
@@ -1276,17 +1275,36 @@
 
         .copyright {
             color: var(--text-secondary);
-            font-size: 0.75rem;
+            font-size: 0.875rem;
         }
 
-        /* Responsive */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
+            .nav-actions {
+                border-left: none;
+                margin-left: 0;
+                padding-left: 0;
+            }
+
+            .hero {
+                padding: 1.5rem 1rem;
+                min-height: calc(100vh - 56px);
+            }
+
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                line-height: 1.1;
             }
 
             .hero p {
                 font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-logo {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 1rem;
             }
 
             .hero-badge {
@@ -1415,12 +1433,6 @@
             .nav-logo img {
                 width: 28px;
                 height: 28px;
-            }
-
-            .hero-logo {
-                width: 100px;
-                height: 100px;
-                margin-bottom: 1rem;
             }
         }
 
@@ -1638,7 +1650,6 @@
                 <div class="stat-value">80%</div>
                 <div class="stat-label">Uptime</div>
                 <div class="stat-sublabel">I'll try to keep it up as much as possible cuz parents turn off wifi in night sadly</div>
-            </div>
         </div>
     </section>
 
@@ -1676,7 +1687,7 @@
     <!-- Gallery Section -->
     <section id="gallery">
         <h2 class="section-title">Server Preview</h2>
-        <p class="section-subtitle">Check out these cool screenshots of server and very cool video</p>
+        <p class="section-subtitle">Check out these cool screenshots of server and very cool video
         
         <div class="gallery-container" id="galleryContainer">
             <div class="gallery-slider" id="gallerySlider">
