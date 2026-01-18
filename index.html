@@ -963,13 +963,19 @@
             height: 40px;
         }
 
+        /* GitHub icon in contact section - invert in dark mode */
         [data-theme="light"] .contact-icon img {
-            filter: invert(0.7);
+            filter: invert(0);
         }
 
         :root:not([data-theme]) .contact-icon img,
         [data-theme="dark"] .contact-icon img {
             filter: invert(1);
+        }
+
+        /* Discord SVG in contact section */
+        .contact-icon svg {
+            color: var(--text-primary);
         }
 
         .contact-card h3 {
@@ -1460,7 +1466,8 @@
             right: 2rem;
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
             border: none;
             border-radius: 50%;
             cursor: pointer;
@@ -1472,12 +1479,12 @@
             visibility: hidden;
             transform: translateY(20px);
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .scroll-to-top:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(220, 38, 38, 0.5);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
         }
 
         .scroll-to-top:active {
@@ -1493,9 +1500,7 @@
         .scroll-to-top svg {
             width: 24px;
             height: 24px;
-            stroke: white;
-            stroke-width: 2.5;
-            fill: none;
+            fill: var(--text-primary);
         }
 
         @media (max-width: 768px) {
@@ -1599,7 +1604,7 @@
     <section class="hero" id="home">
         <img src="https://github.com/Matko802/M-Server-website/blob/main/logos/Black%20And%20White%20Modern%20Vintage%20Retro%20Brand%20Logo.png?raw=true" alt="M Server Logo" class="hero-logo">
         <h1>M SERVER</h1>
-        <p>Join the ultimate Minecraft experience. Build, explore, and create unforgettable adventures with our amazing community.</p>
+        <p>Very good server i think or bad? idk enymore</p>
         
         <div class="ip-box" onclick="copyIP()">
             <span>mode-adds.gl.joinmc.link</span>
@@ -1619,37 +1624,39 @@
     <!-- Server Info Section -->
     <section id="info">
         <h2 class="section-title">Server Information</h2>
-        <p class="section-subtitle">Everything you need to know about our server</p>
+        <p class="section-subtitle">self exple explo expp idk how to say that</p>
         
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-icon"><img src="https://minecraft.wiki/images/Cracked_Stone_Bricks_JE3_BE2.png?2e4f2" alt="Cracked" style="width: 48px; height: 48px; image-rendering: pixelated;"></div>
                 <div class="stat-value">Cracked</div>
                 <div class="stat-label">Server Type</div>
-                <div class="stat-sublabel">Free for everyone who can't afford Minecraft!</div>
+                <div class="stat-sublabel">Free for people that cant afford minecraft how sad</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon"><img src="https://minecraft.wiki/images/Enchanted_Iron_Sword.gif?b2d9d" alt="Survival" style="width: 48px; height: 48px; image-rendering: pixelated;"></div>
                 <div class="stat-value">Survival</div>
-                <div class="stat-label">Game Mode</div>
+                <div class="stat-label">Game Mode</div> 
+                <div class="stat-sublabel">Paper vannila like survival qol plugins</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon"><img src="https://www.minecartrapidtransit.net/wp-content/uploads/2023/11/minecraft-icon.webp" alt="Minecraft" style="width: 48px; height: 48px; object-fit: contain;"></div>
                 <div class="stat-value">1.21.11</div>
                 <div class="stat-label">Version (ViaVersion - Any version works)</div>
+                <div class="stat-sublabel">some versions are unusable tho like 1.8.9</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon"><img src="https://minecraft.wiki/images/Clock_JE3_BE3.gif?8eaae" alt="Clock" style="width: 48px; height: 48px; image-rendering: pixelated;"></div>
                 <div class="stat-value">80%</div>
                 <div class="stat-label">Uptime</div>
-            </div>
+                <div class="stat-sublabel">i try to keep it up as much as possible cuz parents turn off wifi in night sadly</div>
         </div>
     </section>
 
     <!-- Plugins Section -->
     <section id="plugins">
         <h2 class="section-title">Featured Plugins</h2>
-        <p class="section-subtitle">Enhance your gameplay with these amazing server plugins</p>
+        <p class="section-subtitle">i thought that they were important to feature them here</p>
         
         <div class="plugins-grid">
             <div class="plugin-card">
@@ -1680,7 +1687,7 @@
     <!-- Gallery Section -->
     <section id="gallery">
         <h2 class="section-title">Server Preview</h2>
-        <p class="section-subtitle">Check out some screenshots from our amazing server</p>
+        <p class="section-subtitle">Check out these cool screenshots of server and very cool video
         
         <div class="gallery-container" id="galleryContainer">
             <div class="gallery-slider" id="gallerySlider">
@@ -1715,49 +1722,49 @@
     <!-- Rules Section -->
     <section id="rules">
         <h2 class="section-title">Server Rules</h2>
-        <p class="section-subtitle">Please follow these rules to ensure a great experience for everyone</p>
+        <p class="section-subtitle">Just follow these rules cuz i am too lazy to moderate</p>
         
         <div class="rules-grid">
             <div class="rule-card">
                 <div class="rule-number">1</div>
                 <div class="rule-content">
-                    <h3>Be Respectful</h3>
-                    <p>Treat all players with respect. No harassment, hate speech, or discrimination of any kind.</p>
+                    <h3>Respect others</h3>
+                    <p>respect all silly players no bullying ok?</p>
                 </div>
             </div>
             <div class="rule-card">
                 <div class="rule-number">2</div>
                 <div class="rule-content">
                     <h3>No Cheating</h3>
-                    <p>Hacks, mods that give unfair advantages, or exploiting bugs is strictly prohibited.</p>
+                    <p>no hack silly :)</p>
                 </div>
             </div>
             <div class="rule-card">
                 <div class="rule-number">3</div>
                 <div class="rule-content">
-                    <h3>No Griefing</h3>
-                    <p>Don't destroy or modify other players' builds without permission.</p>
+                    <h3>No Griefing :(</h3>
+                    <p>dont destroy hawd work of others pls</p>
                 </div>
             </div>
             <div class="rule-card">
                 <div class="rule-number">4</div>
                 <div class="rule-content">
-                    <h3>Keep Chat Clean</h3>
-                    <p>No spam, advertising, or excessive caps. Keep conversations appropriate.</p>
+                    <h3>No Spam please</h3>
+                    <p>i dont like spam food</p>
                 </div>
             </div>
             <div class="rule-card">
                 <div class="rule-number">5</div>
                 <div class="rule-content">
-                    <h3>Fair Play</h3>
-                    <p>No scamming other players. Honor your trades and agreements.</p>
+                    <h3>Do not scam others</h3>
+                    <p>DO NOT SCAM OTHER PLAYERS THEY WILL REPORT U TO MODS MUAHAHAHA</p>
                 </div>
             </div>
             <div class="rule-card">
                 <div class="rule-number">6</div>
                 <div class="rule-content">
-                    <h3>Listen to Staff</h3>
-                    <p>Follow instructions from moderators and admins. They're here to help.</p>
+                    <h3>Listen to mods ok?</h3>
+                    <p>silly modz r here 2 help u so listen 2 dem</p>
                 </div>
             </div>
         </div>
@@ -1766,24 +1773,23 @@
     <!-- Contact Section -->
     <section id="contact">
         <h2 class="section-title">Join Our Community</h2>
-        <p class="section-subtitle">Connect with us and other players</p>
+        <p class="section-subtitle">Please share to more people so this server gets popular</p>
         
         <div class="contact-grid">
             <a href="https://discord.com/invite/6FHmryXBbp" target="_blank" class="contact-card">
-                <div class="contact-icon">💬</div>
+                <div class="contact-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                    </svg>
+                </div>
                 <h3>Discord</h3>
-                <p>Join our Discord server for updates, support, and community chat.</p>
+                <p>Join discord because why not? there is no other way to contact me </p>
             </a>
             <a href="https://github.com/Matko802/M-Server-website" target="_blank" class="contact-card">
                 <div class="contact-icon"><img src="https://github.com/Matko802/M-Server-website/blob/main/logos/Octicons-mark-github.svg?raw=true" alt="GitHub"></div>
                 <h3>GitHub</h3>
-                <p>Check out our website source code and contribute to the project.</p>
+                <p>Check the source of this if there isnt any malicious code lol. maybe you will find this text there too :)</p>
             </a>
-            <div class="contact-card">
-                <div class="contact-icon">🎮</div>
-                <h3>In-Game</h3>
-                <p>Connect directly at mode-adds.gl.joinmc.link</p>
-            </div>
         </div>
     </section>
 
@@ -1800,7 +1806,7 @@
             <a href="#rules">Rules</a>
             <a href="#contact">Contact</a>
         </div>
-        <p class="copyright">© 2025 M Server. All rights reserved.</p>
+        <p class="copyright">© 2026 M Server. All rights reserved.</p>
     </footer>
 
     <!-- Toast Notification -->
@@ -1808,8 +1814,8 @@
 
     <!-- Scroll to Top Button -->
     <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-            <polyline points="18,15 12,9 6,15" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" fill="white">
+            <polygon points="256 128 448 320 400 368 256 224 112 368 64 320 256 128"/>
         </svg>
     </button>
 
