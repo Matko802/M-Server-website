@@ -535,8 +535,12 @@
             opacity: 1;
         }
 
-        [data-theme="light"] .nav-actions a img.nav-icon-img {
+        .nav-actions a img.nav-icon-img {
             filter: invert(1);
+        }
+
+        [data-theme="light"] .nav-actions a img.nav-icon-img {
+            filter: invert(0);
         }
 
         /* Hero Section */
@@ -1095,23 +1099,23 @@
             transform: scale(1.1);
         }
 
-        /* Gallery Lightbox (60% larger view) */
+        /* Gallery Lightbox (expanded view with blur) */
         .gallery-lightbox {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 2000;
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .gallery-lightbox.active {
@@ -1135,8 +1139,8 @@
         .lightbox-slider {
             overflow: hidden;
             border-radius: 16px;
-            border: 2px solid var(--primary);
-            box-shadow: 0 30px 80px rgba(220, 38, 38, 0.3);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
 
         .lightbox-track {
@@ -1152,6 +1156,31 @@
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        .lightbox-slide iframe,
+        .gallery-slide iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+            border-radius: 12px;
+        }
+
+        .gallery-slide.video-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-slide.video-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-slide.video-slide iframe {
+            max-height: 85vh;
+            width: 100%;
         }
 
         .lightbox-close {
@@ -1230,28 +1259,7 @@
             transform: scale(1.2);
         }
 
-        /* Mobile touch hint */
-        .gallery-swipe-hint {
-            position: absolute;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-
         @media (max-width: 768px) {
-            .gallery-swipe-hint {
-                opacity: 1;
-                visibility: visible;
-            }
 
             .gallery-expand-btn {
                 opacity: 1;
@@ -1340,42 +1348,181 @@
                 padding-left: 0;
             }
 
+            .hero {
+                padding: 1.5rem 1rem;
+                min-height: calc(100vh - 56px);
+            }
+
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                line-height: 1.1;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
             }
 
             .hero-logo {
-                width: 120px;
-                height: 120px;
+                width: 100px;
+                height: 100px;
+                margin-bottom: 1rem;
+            }
+
+            .hero-badge {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
+                margin-bottom: 1.5rem;
             }
 
             .ip-box {
                 flex-direction: column;
                 text-align: center;
+                padding: 0.75rem 1.25rem;
+                margin-bottom: 1.5rem;
             }
 
             .ip-box span {
-                font-size: 1rem;
+                font-size: 0.9rem;
+                word-break: break-all;
+            }
+
+            .copy-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
             }
 
             .hero-buttons {
                 flex-direction: column;
                 width: 100%;
+                gap: 0.75rem;
             }
 
             .btn {
                 width: 100%;
                 justify-content: center;
+                padding: 0.85rem 1.5rem;
+                font-size: 0.95rem;
             }
 
-            .theme-toggle {
-                bottom: 1rem;
-                right: 1rem;
-                width: 48px;
-                height: 48px;
-                font-size: 1.25rem;
+            section {
+                padding: 3rem 1rem;
             }
 
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 2rem;
+            }
+
+            .stats-grid {
+                gap: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.25rem;
+            }
+
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            .plugins-grid {
+                gap: 1rem;
+            }
+
+            .plugin-card {
+                padding: 1.5rem;
+            }
+
+            .rules-grid {
+                gap: 1rem;
+            }
+
+            .rule-card {
+                padding: 1rem;
+            }
+
+            .contact-grid {
+                gap: 1rem;
+            }
+
+            .contact-card {
+                padding: 1.5rem;
+            }
+
+            .gallery-container {
+                margin: 0 -0.5rem;
+            }
+
+            .gallery-nav {
+                width: 40px;
+                height: 40px;
+            }
+
+            .gallery-nav.prev {
+                left: 0.5rem;
+            }
+
+            .gallery-nav.next {
+                right: 0.5rem;
+            }
+
+            footer {
+                padding: 2rem 1rem;
+            }
+
+            .footer-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .lightbox-content {
+                width: 96%;
+                max-height: 90vh;
+            }
+
+            .lightbox-close {
+                top: -40px;
+                width: 36px;
+                height: 36px;
+            }
+
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+            }
+
+            .lightbox-nav.prev {
+                left: 0.25rem;
+            }
+
+            .lightbox-nav.next {
+                right: 0.25rem;
+            }
+
+            .lightbox-dots {
+                margin-top: 1rem;
+            }
+        }
+
+        /* Extra small mobile */
+        @media (max-width: 380px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .ip-box span {
+                font-size: 0.8rem;
+            }
+
+            .nav-logo img {
+                width: 28px;
+                height: 28px;
+            }
         }
 
         /* Toast Notification */
@@ -1640,6 +1787,9 @@
                     </svg>
                 </button>
                 <div class="gallery-track" id="galleryTrack">
+                    <div class="gallery-slide video-slide" data-video="true">
+                        <iframe src="https://www.youtube.com/embed/UcNDuYcZVGo?vq=hd1080" title="Server Preview Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
                     <div class="gallery-slide">
                         <img src="https://github.com/Matko802/M-Server-website/blob/main/Screenshots/huge_2026-01-17_10.28.49.png?raw=true" alt="Server Screenshot 1">
                     </div>
@@ -1657,11 +1807,10 @@
             <button class="gallery-nav next" onclick="nextSlide()">
                 <!-- CoreUI Chevron Right Icon -->
                 <svg viewBox="0 0 512 512" width="24" height="24">
-                    <path fill="currentColor" d="M183.505,496,86.237,398.73,229.412,255.556,86.237,112.38l97.268-97.27L326.732,158.338l11.316,11.209,85.9,85.9,0,0,.051.05-11.311,11.419-85.9,85.9-.055-.054Zm-52.013-97.27,52.013,52.014L326.629,307.62l.055.054L378.8,255.556l-52.127-52.128-11.308-11.2L183.505,60.366,131.492,112.38,274.667,255.556Z"></path>
+                    <path fill="currentColor" d="M184.914,496.89l142.6-142.6,11.258-11.15,85.6-85.6-.054-.054-11.259-11.367-85.5-85.5-.054.054L184.914,17.978,88,114.989l142.494,142.494L88,399.978ZM327.36,309.3l-11.266,11.159L184.914,451.64l-51.658-51.658L275.749,257.483,133.256,114.989l51.658-51.658L327.306,205.725l.054-.054,51.813,51.812Z"></path>
                 </svg>
             </button>
             <div class="gallery-dots" id="galleryDots"></div>
-            <div class="gallery-swipe-hint">👆 Swipe to navigate</div>
         </div>
     </section>
 
@@ -1671,22 +1820,20 @@
             <button class="lightbox-close" onclick="closeLightbox()">
                 <!-- CoreUI X Icon -->
                 <svg viewBox="0 0 512 512" width="20" height="20">
-                    <polygon fill="currentColor" points="427.314 107.313 404.686 84.687 256 233.373 107.314 84.687 84.686 107.313 233.373 256 84.686 404.687 107.314 427.313 256 278.627 404.686 427.313 427.314 404.687 278.627 256 427.314 107.313"></polygon>
+                    <polygon fill="currentColor" points="438.627 118.627 393.373 73.373 256 210.746 118.627 73.373 73.373 118.627 210.746 256 73.373 393.373 118.627 438.627 256 301.254 393.373 438.627 438.627 393.373 301.254 256 438.627 118.627"></polygon>
                 </svg>
             </button>
             <div class="lightbox-slider">
                 <div class="lightbox-track" id="lightboxTrack"></div>
             </div>
             <button class="lightbox-nav prev" onclick="lightboxPrev()">
-                <!-- CoreUI Chevron Left Icon -->
                 <svg viewBox="0 0 512 512" width="24" height="24">
                     <path fill="currentColor" d="M327.086,496.89l-142.6-142.6-11.258-11.15-85.6-85.6.054-.054,11.259-11.367,85.5-85.5.054.054,142.6-142.595L424,114.989,281.506,257.483,424,399.978ZM184.64,309.3l11.266,11.159,131.18,131.181,51.658-51.658L236.251,257.483,378.744,114.989,327.086,63.331,184.694,205.725l-.054-.054-51.813,51.812Z"></path>
                 </svg>
             </button>
             <button class="lightbox-nav next" onclick="lightboxNext()">
-                <!-- CoreUI Chevron Right Icon -->
                 <svg viewBox="0 0 512 512" width="24" height="24">
-                    <path fill="currentColor" d="M183.505,496,86.237,398.73,229.412,255.556,86.237,112.38l97.268-97.27L326.732,158.338l11.316,11.209,85.9,85.9,0,0,.051.05-11.311,11.419-85.9,85.9-.055-.054Zm-52.013-97.27,52.013,52.014L326.629,307.62l.055.054L378.8,255.556l-52.127-52.128-11.308-11.2L183.505,60.366,131.492,112.38,274.667,255.556Z"></path>
+                    <path fill="currentColor" d="M184.914,496.89l142.6-142.6,11.258-11.15,85.6-85.6-.054-.054-11.259-11.367-85.5-85.5-.054.054L184.914,17.978,88,114.989l142.494,142.494L88,399.978ZM327.36,309.3l-11.266,11.159L184.914,451.64l-51.658-51.658L275.749,257.483,133.256,114.989l51.658-51.658L327.306,205.725l.054-.054,51.813,51.812Z"></path>
                 </svg>
             </button>
             <div class="lightbox-dots" id="lightboxDots"></div>
@@ -1703,42 +1850,42 @@
                 <div class="rule-number">1</div>
                 <div class="rule-content">
                     <h3>Be Respectful</h3>
-                    <p>Treat all players with respect. No harassment, bullying, or hate speech.</p>
+                    <p>Treat all players with respect. No harassment, hate speech, or discrimination of any kind.</p>
                 </div>
             </div>
             <div class="rule-card">
                 <div class="rule-number">2</div>
                 <div class="rule-content">
                     <h3>No Cheating</h3>
-                    <p>Hacks, exploits, and unfair advantages are strictly prohibited.</p>
+                    <p>Hacks, mods that give unfair advantages, or exploiting bugs is strictly prohibited.</p>
                 </div>
             </div>
             <div class="rule-card">
                 <div class="rule-number">3</div>
                 <div class="rule-content">
                     <h3>No Griefing</h3>
-                    <p>Don't destroy or steal from other players' builds without permission.</p>
+                    <p>Don't destroy or modify other players' builds without permission.</p>
                 </div>
             </div>
             <div class="rule-card">
                 <div class="rule-number">4</div>
                 <div class="rule-content">
                     <h3>Keep Chat Clean</h3>
-                    <p>No spam, excessive caps, or inappropriate content in chat.</p>
+                    <p>No spam, advertising, or excessive caps. Keep conversations appropriate.</p>
                 </div>
             </div>
             <div class="rule-card">
                 <div class="rule-number">5</div>
                 <div class="rule-content">
-                    <h3>No Advertising</h3>
-                    <p>Don't advertise other servers, websites, or services.</p>
+                    <h3>Fair Play</h3>
+                    <p>No scamming other players. Honor your trades and agreements.</p>
                 </div>
             </div>
             <div class="rule-card">
                 <div class="rule-number">6</div>
                 <div class="rule-content">
                     <h3>Listen to Staff</h3>
-                    <p>Follow instructions from moderators and admins at all times.</p>
+                    <p>Follow instructions from moderators and admins. They're here to help.</p>
                 </div>
             </div>
         </div>
@@ -1746,24 +1893,25 @@
 
     <!-- Contact Section -->
     <section id="contact">
-        <h2 class="section-title">Get In Touch</h2>
-        <p class="section-subtitle">Connect with us through your preferred platform</p>
+        <h2 class="section-title">Join Our Community</h2>
+        <p class="section-subtitle">Connect with us and other players</p>
         
         <div class="contact-grid">
             <a href="https://discord.com/invite/6FHmryXBbp" target="_blank" class="contact-card">
-                <div class="contact-icon">
-                    <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/66e278299a53f5bf88615e90_Symbol.svg" alt="Discord">
-                </div>
+                <div class="contact-icon">💬</div>
                 <h3>Discord</h3>
-                <p>Join our community server</p>
+                <p>Join our Discord server for updates, support, and community chat.</p>
             </a>
-            <a href="https://t.me/matkomserver" target="_blank" class="contact-card">
-                <div class="contact-icon">
-                    <img src="https://github.com/Matko802/M-Server-website/blob/main/logos/telegram%20logo.png?raw=true" alt="Telegram" style="width: 32px; height: 32px;">
-                </div>
-                <h3>Telegram</h3>
-                <p>@matkomserver</p>
+            <a href="https://github.com/Matko802/M-Server-website" target="_blank" class="contact-card">
+                <div class="contact-icon"><img src="https://github.com/Matko802/M-Server-website/blob/main/logos/Octicons-mark-github.svg?raw=true" alt="GitHub"></div>
+                <h3>GitHub</h3>
+                <p>Check out our website source code and contribute to the project.</p>
             </a>
+            <div class="contact-card">
+                <div class="contact-icon">🎮</div>
+                <h3>In-Game</h3>
+                <p>Connect directly at mode-adds.gl.joinmc.link</p>
+            </div>
         </div>
     </section>
 
@@ -1771,7 +1919,7 @@
     <footer>
         <div class="footer-logo">
             <img src="https://github.com/Matko802/M-Server-website/blob/main/logos/Black%20And%20White%20Modern%20Vintage%20Retro%20Brand%20Logo.png?raw=true" alt="M Server Logo">
-            <span class="footer-logo-text">M SERVER</span>
+            <span class="footer-logo-text">M Server</span>
         </div>
         <div class="footer-links">
             <a href="#home">Home</a>
@@ -1780,73 +1928,78 @@
             <a href="#rules">Rules</a>
             <a href="#contact">Contact</a>
         </div>
-        <p class="copyright">© 2026 M Server. All rights reserved. Not affiliated with Mojang AB.</p>
+        <p class="copyright">© 2025 M Server. All rights reserved.</p>
     </footer>
 
     <!-- Toast Notification -->
-    <div class="toast" id="toast">IP Copied to Clipboard!</div>
+    <div class="toast" id="toast">IP copied to clipboard!</div>
 
     <!-- Scroll to Top Button -->
     <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
-        <!-- CoreUI Arrow Top Icon -->
-        <svg viewBox="0 0 512 512" width="24" height="24">
-            <polygon fill="currentColor" points="390.624 150.625 256 16 121.376 150.625 144.004 173.252 240.001 77.254 240.001 495.236 272.001 495.236 272.001 77.257 367.996 173.252 390.624 150.625"></polygon>
+        <svg viewBox="0 0 24 24" width="24" height="24">
+            <polyline points="18,15 12,9 6,15" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </button>
 
     <script>
+        // Copy IP function
+        function copyIP() {
+            navigator.clipboard.writeText('mode-adds.gl.joinmc.link');
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        // Theme toggle with 3-state cycle: dark -> light -> auto
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Theme states: 'dark', 'light', 'auto'
+        let currentThemeMode = localStorage.getItem('themeMode') || 'dark';
+
         function getSystemTheme() {
-            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
 
         function applyTheme(mode) {
-            const html = document.documentElement;
+            html.removeAttribute('data-theme-mode');
+            
             if (mode === 'auto') {
-                const systemTheme = getSystemTheme();
-                html.setAttribute('data-theme', systemTheme);
                 html.setAttribute('data-theme-mode', 'auto');
+                html.setAttribute('data-theme', getSystemTheme());
             } else {
                 html.setAttribute('data-theme', mode);
-                html.setAttribute('data-theme-mode', mode);
             }
-            localStorage.setItem('themeMode', mode);
-        }
-
-        function toggleTheme() {
-            const currentMode = localStorage.getItem('themeMode') || 'auto';
-            let nextMode;
-            if (currentMode === 'auto') nextMode = 'dark';
-            else if (currentMode === 'dark') nextMode = 'light';
-            else nextMode = 'auto';
-            applyTheme(nextMode);
         }
 
         function initTheme() {
-            const savedMode = localStorage.getItem('themeMode') || 'auto';
-            applyTheme(savedMode);
+            applyTheme(currentThemeMode);
         }
 
-        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
-            if (localStorage.getItem('themeMode') === 'auto' || !localStorage.getItem('themeMode')) {
-                document.documentElement.setAttribute('data-theme', e.matches ? 'light' : 'dark');
+        themeToggle.addEventListener('click', () => {
+            // Cycle: dark -> light -> auto -> dark
+            if (currentThemeMode === 'dark') {
+                currentThemeMode = 'light';
+            } else if (currentThemeMode === 'light') {
+                currentThemeMode = 'auto';
+            } else {
+                currentThemeMode = 'dark';
+            }
+            
+            localStorage.setItem('themeMode', currentThemeMode);
+            applyTheme(currentThemeMode);
+        });
+
+        // Listen for system theme changes when in auto mode
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (currentThemeMode === 'auto') {
+                applyTheme('auto');
             }
         });
 
-        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-
-
-        // Copy IP
-        function copyIP() {
-            navigator.clipboard.writeText('mode-adds.gl.joinmc.link').then(() => {
-                const toast = document.getElementById('toast');
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 3000);
-            });
-        }
-
-        // Smooth scroll with offset for fixed navbar
+        // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
@@ -1857,14 +2010,11 @@
             });
         });
 
-        // Gallery with Auto-play
+        // Gallery - Manual navigation only (no auto-slide, no swipe)
         let currentSlide = 0;
         const track = document.getElementById('galleryTrack');
         const slides = document.querySelectorAll('.gallery-slide');
         const totalSlides = slides.length;
-        const galleryContainer = document.querySelector('.gallery-container');
-        let autoPlayInterval = null;
-        const autoPlayDelay = 5000; // 5 seconds between slides
 
         function createDots() {
             const dotsContainer = document.getElementById('galleryDots');
@@ -1899,131 +2049,51 @@
             goToSlide(currentSlide);
         }
 
-        // Auto-play functions
-        function startAutoPlay() {
-            if (autoPlayInterval) return;
-            autoPlayInterval = setInterval(nextSlide, autoPlayDelay);
-        }
-
-        function stopAutoPlay() {
-            if (autoPlayInterval) {
-                clearInterval(autoPlayInterval);
-                autoPlayInterval = null;
-            }
-        }
-
-        // Pause on hover
-        galleryContainer.addEventListener('mouseenter', stopAutoPlay);
-        galleryContainer.addEventListener('mouseleave', startAutoPlay);
-
-        // Touch Swipe Support for Gallery
-        const gallerySlider = document.getElementById('gallerySlider');
-        let touchStartX = 0;
-        let touchEndX = 0;
-        let touchStartY = 0;
-        let touchEndY = 0;
-        let isSwiping = false;
-        const swipeThreshold = 50;
-
-        function handleTouchStart(e) {
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-            isSwiping = true;
-            stopAutoPlay();
-        }
-
-        function handleTouchMove(e) {
-            if (!isSwiping) return;
-            touchEndX = e.touches[0].clientX;
-            touchEndY = e.touches[0].clientY;
-            
-            // Prevent vertical scroll if horizontal swipe is detected
-            const diffX = Math.abs(touchEndX - touchStartX);
-            const diffY = Math.abs(touchEndY - touchStartY);
-            if (diffX > diffY && diffX > 10) {
-                e.preventDefault();
-            }
-        }
-
-        function handleTouchEnd() {
-            if (!isSwiping) return;
-            isSwiping = false;
-            
-            const diffX = touchStartX - touchEndX;
-            const diffY = Math.abs(touchStartY - touchEndY);
-            
-            // Only trigger swipe if horizontal movement is greater than vertical
-            if (Math.abs(diffX) > swipeThreshold && Math.abs(diffX) > diffY) {
-                if (diffX > 0) {
-                    nextSlide();
-                } else {
-                    prevSlide();
-                }
-            }
-            
-            startAutoPlay();
-        }
-
-        gallerySlider.addEventListener('touchstart', handleTouchStart, { passive: true });
-        gallerySlider.addEventListener('touchmove', handleTouchMove, { passive: false });
-        gallerySlider.addEventListener('touchend', handleTouchEnd, { passive: true });
-
-        // Lightbox functionality
+        // Lightbox functionality - shows the same element expanded
         const lightbox = document.getElementById('galleryLightbox');
         const lightboxTrack = document.getElementById('lightboxTrack');
         const lightboxDotsContainer = document.getElementById('lightboxDots');
-        let lightboxSlide = 0;
-
-        // Build lightbox slides from gallery
-        function buildLightbox() {
-            slides.forEach((slide, index) => {
-                const img = slide.querySelector('img');
-                const lightboxSlideEl = document.createElement('div');
-                lightboxSlideEl.className = 'lightbox-slide';
-                lightboxSlideEl.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
-                lightboxTrack.appendChild(lightboxSlideEl);
-
-                const dot = document.createElement('div');
-                dot.className = 'lightbox-dot' + (index === 0 ? ' active' : '');
-                dot.onclick = () => goToLightboxSlide(index);
-                lightboxDotsContainer.appendChild(dot);
-            });
-        }
 
         function openLightbox() {
-            lightboxSlide = currentSlide;
-            updateLightbox();
+            // Clear previous content
+            lightboxTrack.innerHTML = '';
+            lightboxDotsContainer.innerHTML = '';
+            
+            // Get the current slide element
+            const currentSlideEl = slides[currentSlide];
+            const lightboxSlideEl = document.createElement('div');
+            
+            if (currentSlideEl.dataset.video === 'true') {
+                const iframe = currentSlideEl.querySelector('iframe');
+                lightboxSlideEl.className = 'lightbox-slide video-slide';
+                // Keep same video settings (unmuted, 1080p)
+                lightboxSlideEl.innerHTML = `<iframe src="${iframe.src}" title="${iframe.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+            } else {
+                const img = currentSlideEl.querySelector('img');
+                lightboxSlideEl.className = 'lightbox-slide';
+                lightboxSlideEl.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
+            }
+            
+            lightboxTrack.appendChild(lightboxSlideEl);
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
-            stopAutoPlay();
         }
 
         function closeLightbox() {
             lightbox.classList.remove('active');
             document.body.style.overflow = '';
-            startAutoPlay();
-        }
-
-        function goToLightboxSlide(index) {
-            lightboxSlide = index;
-            updateLightbox();
-        }
-
-        function updateLightbox() {
-            lightboxTrack.style.transform = `translateX(-${lightboxSlide * 100}%)`;
-            document.querySelectorAll('.lightbox-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === lightboxSlide);
-            });
         }
 
         function lightboxNext() {
-            lightboxSlide = (lightboxSlide + 1) % totalSlides;
-            updateLightbox();
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+            openLightbox();
         }
 
         function lightboxPrev() {
-            lightboxSlide = (lightboxSlide - 1 + totalSlides) % totalSlides;
-            updateLightbox();
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            goToSlide(currentSlide);
+            openLightbox();
         }
 
         // Close lightbox on background click
@@ -2044,31 +2114,9 @@
             }
         });
 
-        // Lightbox touch swipe support
-        let lightboxTouchStartX = 0;
-        let lightboxTouchEndX = 0;
-
-        lightbox.addEventListener('touchstart', (e) => {
-            lightboxTouchStartX = e.touches[0].clientX;
-        }, { passive: true });
-
-        lightbox.addEventListener('touchend', (e) => {
-            lightboxTouchEndX = e.changedTouches[0].clientX;
-            const diff = lightboxTouchStartX - lightboxTouchEndX;
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
-                    lightboxNext();
-                } else {
-                    lightboxPrev();
-                }
-            }
-        }, { passive: true });
-
         // Initialize
         initTheme();
         createDots();
-        buildLightbox();
-        startAutoPlay();
 
         // Scroll detection for dynamic nav resize
         const navDock = document.getElementById('navDock');
