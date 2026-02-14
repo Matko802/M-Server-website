@@ -6,7 +6,8 @@
     <title>M Server - Minecraft Server</title>
     <meta name="description" content="Join the M Server Minecraft Server, a vanilla-like survival experience!">
     <link rel="icon" href="https://github.com/Matko802/M-Server-website/blob/main/logos/Black%20And%20White%20Modern%20Vintage%20Retro%20Brand%20Logo.png?raw=true" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -34,6 +35,9 @@
             --nav-padding-v: 0.85rem;
             --nav-padding-h: 2.5rem;
             --nav-gap: 2.5rem;
+            
+            --glass-bg: rgba(20, 20, 20, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         [data-theme="light"] {
@@ -48,6 +52,9 @@
             --scrollbar-track: rgba(240, 240, 240, 0.9);
             --scrollbar-thumb: #dc2626;
             --scrollbar-thumb-hover: #991b1b;
+            
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(0, 0, 0, 0.1);
         }
 
         /* Custom Scrollbar */
@@ -104,36 +111,26 @@
             pointer-events: none;
         }
 
-        .grid-container {
-            position: absolute;
-            top: -100%;
-            left: 0;
-            width: 100%;
-            height: 300%;
-            animation: gridMoveUp 60s linear infinite;
-            will-change: transform;
-        }
-
-        .grid-container::before {
+        .grid-background::before {
             content: '';
             position: absolute;
-            top: 0;
+            top: -40px;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: calc(100% + 80px);
             background-image: 
                 linear-gradient(var(--grid-border) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-border) 1px, transparent 1px);
             background-size: 40px 40px;
+            animation: gridScroll 3s linear infinite;
+            will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
-        @keyframes gridMoveUp {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(33.333%);
-            }
+        @keyframes gridScroll {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(0, 40px, 0); }
         }
 
         /* Theme Toggle Button */
@@ -253,13 +250,20 @@
             padding: 4px;
             z-index: 1002;
             flex-shrink: 0;
+            color: var(--text-secondary);
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .hamburger:hover {
+            color: var(--text-primary);
+            transform: scale(1.1);
         }
 
         .hamburger span {
             display: block;
             width: 22px;
             height: 2px;
-            background: var(--text-primary);
+            background: currentColor;
             border-radius: 2px;
             transition: all 0.3s ease;
             position: relative;
@@ -272,7 +276,7 @@
             left: 0;
             width: 22px;
             height: 2px;
-            background: var(--text-primary);
+            background: currentColor;
             border-radius: 2px;
             transition: all 0.3s ease;
         }
@@ -508,12 +512,13 @@
         .nav-actions a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
             transition: color 0.3s, transform 0.2s;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            padding: 0;
             flex-shrink: 0;
         }
 
@@ -523,33 +528,14 @@
         }
 
         .nav-actions a svg {
-            fill: currentColor;
-        }
-
-        .nav-actions a img.nav-icon-img {
-            opacity: 0.6;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav-actions a:hover img.nav-icon-img {
-            opacity: 1;
-        }
-
-        .nav-actions a img.nav-icon-img {
-            filter: invert(0);
-        }
-
-        [data-theme="light"] .nav-actions a img.nav-icon-img {
-            filter: invert(0);
-        }
-
-        :root:not([data-theme]), [data-theme="dark"] {
-            --github-icon-filter: invert(1);
-        }
-
-        :root:not([data-theme]) .nav-actions a img.nav-icon-img,
-        [data-theme="dark"] .nav-actions a img.nav-icon-img {
-            filter: invert(1);
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: opacity 0.15s ease, transform 0.2s ease;
         }
 
         /* Hero Section */
@@ -576,6 +562,7 @@
             margin-bottom: 2rem;
             font-size: 0.875rem;
             color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .status-dot {
@@ -597,6 +584,8 @@
             margin-bottom: 1.5rem;
             border-radius: 50%;
             object-fit: cover;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         [data-theme="light"] .hero-logo {
@@ -622,8 +611,9 @@
         }
 
         .ip-box {
-            background: var(--bg-card);
-            border: 2px solid var(--primary);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
             padding: 1rem 2rem;
             display: flex;
@@ -631,33 +621,41 @@
             gap: 1rem;
             margin-bottom: 2rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
         }
 
         .ip-box:hover {
-            transform: scale(1.02);
+            transform: scale(1.02) translate3d(0, 0, 0);
+            border-color: var(--primary);
         }
 
         .ip-box span {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-primary);
         }
 
         .copy-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
+            background: rgba(220, 38, 38, 0.15);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            color: var(--primary);
             padding: 0.5rem 1rem;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
         }
 
         .copy-btn:hover {
-            background: var(--primary-light);
+            background: rgba(220, 38, 38, 0.25);
+            border-color: var(--primary);
         }
 
         .hero-buttons {
@@ -673,32 +671,40 @@
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            border: none;
+            background: rgba(220, 38, 38, 0.15);
+            border-color: rgba(220, 38, 38, 0.3);
+            color: var(--primary);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
+            background: rgba(220, 38, 38, 0.25);
+            border-color: var(--primary);
         }
 
         .btn-secondary {
-            background: transparent;
+            background: var(--glass-bg);
             color: var(--text-primary);
-            border: 2px solid var(--border-color);
+            border-color: var(--glass-border);
         }
 
         .btn-secondary:hover {
             border-color: var(--primary);
             color: var(--primary);
+            background: rgba(220, 38, 38, 0.1);
         }
 
         /* Sections */
@@ -743,19 +749,21 @@
         }
 
         .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             border-radius: 16px;
             padding: 2rem;
             text-align: center;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
         }
 
         .stat-card:hover {
             border-color: var(--primary);
-            background: var(--bg-card-hover);
         }
-
 
         .stat-icon {
             font-size: 2.5rem;
@@ -774,6 +782,7 @@
         .stat-label {
             color: var(--text-secondary);
             font-size: 0.875rem;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         .stat-sublabel {
@@ -781,6 +790,7 @@
             font-size: 0.75rem;
             margin-top: 0.5rem;
             opacity: 0.8;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         /* Plugins Grid */
@@ -793,17 +803,20 @@
         }
 
         .plugin-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             border-radius: 16px;
             padding: 2rem;
             text-align: center;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
         }
 
         .plugin-card:hover {
             border-color: var(--primary);
-            background: var(--bg-card-hover);
         }
 
         .plugin-icon {
@@ -835,6 +848,7 @@
             font-size: 0.75rem;
             font-weight: 600;
             margin-top: 1rem;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         /* Modrinth Logo Link Styles */
@@ -887,27 +901,31 @@
         }
 
         .rule-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             border-radius: 16px;
             padding: 1.5rem;
             display: flex;
             gap: 1rem;
             align-items: flex-start;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
         }
 
         .rule-card:hover {
             border-color: var(--primary);
-            background: var(--bg-card-hover);
         }
 
         .rule-number {
-            background: var(--primary);
-            color: white;
+            background: transparent;
+            color: var(--text-primary);
             width: 40px;
             height: 40px;
-            border-radius: 10px;
+            border-radius: 50%;
+            border: 2px solid var(--text-primary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -937,20 +955,23 @@
         }
 
         .contact-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             border-radius: 16px;
             padding: 2rem;
             text-align: center;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             text-decoration: none;
             color: inherit;
             display: block;
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
         }
 
         .contact-card:hover {
             border-color: var(--primary);
-            background: var(--bg-card-hover);
         }
 
         .contact-icon {
@@ -988,6 +1009,11 @@
         /* Discord SVG in contact section */
         .contact-icon svg {
             color: var(--text-primary);
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .contact-card h3 {
@@ -1032,9 +1058,6 @@
         }
 
         .gallery-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%) scale(0.9);
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
@@ -1047,32 +1070,26 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
-            z-index: 10;
-            opacity: 0.6;
         }
 
-        .gallery-slider:hover .gallery-nav,
         .gallery-nav:hover {
-            opacity: 1;
-            transform: translateY(-50%) scale(1);
-            background: var(--accent);
-            border-color: var(--accent);
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: scale(1.1);
         }
 
-
-        .gallery-nav.prev {
-            left: 1rem;
-        }
-
-        .gallery-nav.next {
-            right: 1rem;
+        .gallery-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
 
         .gallery-dots {
             display: flex;
             justify-content: center;
             gap: 0.5rem;
-            margin-top: 1rem;
         }
 
         .gallery-dot {
@@ -1288,6 +1305,7 @@
         .copyright {
             color: var(--text-secondary);
             font-size: 0.875rem;
+            font-family: 'JetBrains Mono', monospace;
         }
 
         /* Mobile Responsive */
@@ -1413,14 +1431,6 @@
                 height: 40px;
             }
 
-            .gallery-nav.prev {
-                left: 0.5rem;
-            }
-
-            .gallery-nav.next {
-                right: 0.5rem;
-            }
-
             footer {
                 padding: 2rem 1rem;
             }
@@ -1512,7 +1522,11 @@
         .scroll-to-top svg {
             width: 24px;
             height: 24px;
-            fill: var(--text-primary);
+            fill: none;
+            stroke: var(--text-primary);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         @media (max-width: 768px) {
@@ -1528,12 +1542,36 @@
                 height: 20px;
             }
         }
+
+        /* Easter Egg Animations */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+
+        @keyframes reappear {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .hero-logo.reappearing {
+            animation: reappear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .shake-page {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
     </style>
 </head>
 <body>
     <div class="grid-background">
-        <div class="grid-container">
-        </div>
     </div>
 
     <nav class="nav-dock" id="navDock">
@@ -1550,30 +1588,36 @@
         </ul>
         <div class="nav-actions">
             <a href="https://discord.com/invite/6FHmryXBbp" target="_blank" title="Discord">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M8 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                    <path d="M14 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                    <path d="M15.5 17c0 1 1.5 3 2 3c1.5 0 2.833 -1.667 3.5 -3c.667 -1.667 .5 -5.833 -1.5 -11.5c-1.457 -1.015 -3 -1.34 -4.5 -1.5l-.972 1.923a11.913 11.913 0 0 0 -4.053 0l-.975 -1.923c-1.5 .16 -3.043 .485 -4.5 1.5c-2 5.667 -2.167 9.833 -1.5 11.5c.667 1.333 2 3 3.5 3c.5 0 2 -2 2 -3" />
+                    <path d="M7 16.5c3.5 1 6.5 1 10 0" />
                 </svg>
             </a>
             <a href="https://github.com/Matko802/M-Server-website" target="_blank" title="GitHub">
-                <img src="https://github.com/Matko802/M-Server-website/blob/main/logos/Octicons-mark-github.svg?raw=true" alt="GitHub" width="20" height="20" class="nav-icon-img">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+                </svg>
             </a>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme mode">
-                <svg class="moon-icon" viewBox="0 0 512 512" width="20" height="20">
-                    <path fill="currentColor" d="M268.279,496c-67.574,0-130.978-26.191-178.534-73.745S16,311.293,16,243.718A252.252,252.252,0,0,1,154.183,18.676a24.44,24.44,0,0,1,34.46,28.958,220.12,220.12,0,0,0,54.8,220.923A218.746,218.746,0,0,0,399.085,333.2h0a220.2,220.2,0,0,0,65.277-9.846,24.439,24.439,0,0,1,28.959,34.461A252.256,252.256,0,0,1,268.279,496ZM153.31,55.781A219.3,219.3,0,0,0,48,243.718C48,365.181,146.816,464,268.279,464a219.3,219.3,0,0,0,187.938-105.31,252.912,252.912,0,0,1-57.13,6.513h0a250.539,250.539,0,0,1-178.268-74.016,252.147,252.147,0,0,1-67.509-235.4Z"></path>
+                <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
                 </svg>
-                <svg class="sun-icon" viewBox="0 0 512 512" width="20" height="20">
-                    <path fill="currentColor" d="M256,104c-83.813,0-152,68.187-152,152s68.187,152,152,152,152-68.187,152-152S339.813,104,256,104Zm0,272A120,120,0,1,1,376,256,120.136,120.136,0,0,1,256,376Z"></path>
-                    <rect width="32" height="48" x="240" y="16" fill="currentColor"></rect>
-                    <rect width="32" height="48" x="240" y="448" fill="currentColor"></rect>
-                    <rect width="48" height="32" x="448" y="240" fill="currentColor"></rect>
-                    <rect width="48" height="32" x="16" y="240" fill="currentColor"></rect>
-                    <rect width="32" height="45.255" x="400" y="393.373" fill="currentColor" transform="rotate(-45 416 416)"></rect>
-                    <rect width="32.001" height="45.255" x="80" y="73.373" fill="currentColor" transform="rotate(-45 96 96)"></rect>
-                    <rect width="45.255" height="32" x="73.373" y="400" fill="currentColor" transform="rotate(-45.001 96.002 416.003)"></rect>
-                    <rect width="45.255" height="32.001" x="393.373" y="80" fill="currentColor" transform="rotate(-45 416 96)"></rect>
+                <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+                    <path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" />
                 </svg>
-                <svg class="auto-icon" viewBox="0 0 512 512" width="20" height="20">
-                    <path fill="currentColor" d="M256,16C123.452,16,16,123.452,16,256S123.452,496,256,496,496,388.548,496,256,388.548,16,256,16ZM234,462.849a208.346,208.346,0,0,1-169.667-125.9c-.364-.859-.706-1.724-1.057-2.587L234,429.939Zm0-69.582L50.889,290.76A209.848,209.848,0,0,1,48,256q0-9.912.922-19.67L234,339.939Zm0-90L54.819,202.96a206.385,206.385,0,0,1,9.514-27.913Q67.1,168.5,70.3,162.191L234,253.934Zm0-86.015L86.914,134.819a209.42,209.42,0,0,1,22.008-25.9q3.72-3.72,7.6-7.228L234,166.027Zm0-87.708L144.352,80.451A206.951,206.951,0,0,1,234,49.151ZM464,256A207.775,207.775,0,0,1,266,463.761V48.239A207.791,207.791,0,0,1,464,256Z"></path>
+                <svg class="auto-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M3 5a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-10z" />
+                    <path d="M7 20h10" />
+                    <path d="M9 16v4" />
+                    <path d="M15 16v4" />
                 </svg>
             </button>
             <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu">
@@ -1594,18 +1638,25 @@
         </ul>
         <div class="mobile-menu-actions">
             <a href="https://discord.com/invite/6FHmryXBbp" target="_blank" title="Discord">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M8 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                    <path d="M14 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                    <path d="M15.5 17c0 1 1.5 3 2 3c1.5 0 2.833 -1.667 3.5 -3c.667 -1.667 .5 -5.833 -1.5 -11.5c-1.457 -1.015 -3 -1.34 -4.5 -1.5l-.972 1.923a11.913 11.913 0 0 0 -4.053 0l-.975 -1.923c-1.5 .16 -3.043 .485 -4.5 1.5c-2 5.667 -2.167 9.833 -1.5 11.5c.667 1.333 2 3 3.5 3c.5 0 2 -2 2 -3" />
+                    <path d="M7 16.5c3.5 1 6.5 1 10 0" />
                 </svg>
             </a>
             <a href="https://github.com/Matko802/M-Server-website" target="_blank" title="GitHub">
-                <img src="https://github.com/Matko802/M-Server-website/blob/main/logos/Octicons-mark-github.svg?raw=true" alt="GitHub" width="24" height="24" class="nav-icon-img">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+                </svg>
             </a>
         </div>
     </div>
 
     <section class="hero" id="home">
-        <img src="https://github.com/Matko802/M-Server-website/blob/main/logos/Black%20And%20White%20Modern%20Vintage%20Retro%20Brand%20Logo.png?raw=true" alt="M Server Logo" class="hero-logo">
+        <img src="https://github.com/Matko802/M-Server-website/blob/main/logos/Black%20And%20White%20Modern%20Vintage%20Retro%20Brand%20Logo.png?raw=true" alt="M Server Logo" class="hero-logo" draggable="false" oncontextmenu="return false;">
         <h1>M SERVER</h1>
         <p>Very good server i think or bad? idk anymore :p</p>
         
@@ -1619,7 +1670,7 @@
                 Join Discord
             </a>
             <a href="#info" class="btn btn-secondary">
-                📖 Learn More
+                Learn More
             </a>
         </div>
     </section>
@@ -1669,7 +1720,6 @@
                 </div>
                 <h3>NoChatReports</h3>
                 <p>Your chat messages are protected! This plugin prevents chat reporting, ensuring your privacy and freedom of expression while playing on our server.</p>
-                <span class="plugin-badge">Privacy Protected</span>
             </div>
             <div class="plugin-card">
                 <div class="plugin-icon" style="position: relative;">
@@ -1680,7 +1730,6 @@
                 </div>
                 <h3>Simple Voice Chat</h3>
                 <p>Talk with nearby players using proximity voice chat! Communicate naturally with friends and coordinate better during your adventures.</p>
-                <span class="plugin-badge">Voicechat Supported</span>
             </div>
         </div>
     </section>
@@ -1703,17 +1752,21 @@
                     </div>
                 </div>
             </div>
-            <button class="gallery-nav prev" onclick="prevSlide()" aria-label="Previous slide">
-                <svg viewBox="0 0 512 512" width="24" height="24">
-                    <path fill="currentColor" d="M327.086,496.89l-142.6-142.6-11.258-11.15-85.6-85.6.054-.054,11.259-11.367,85.5-85.5.054.054,142.6-142.595L424,114.989,281.506,257.483,424,399.978ZM184.64,309.3l11.266,11.159,131.18,131.181,51.658-51.658L236.251,257.483,378.744,114.989,327.086,63.331,184.694,205.725l-.054-.054-51.813,51.812Z"></path>
-                </svg>
-            </button>
-            <button class="gallery-nav next" onclick="nextSlide()" aria-label="Next slide">
-                <svg viewBox="0 0 512 512" width="24" height="24">
-                    <path fill="currentColor" d="M184.914,496.89l142.6-142.6,11.258-11.15,85.6-85.6-.054-.054-11.259-11.367-85.5-85.5-.054.054L184.914,17.978,88,114.989l142.494,142.494L88,399.978ZM327.36,309.3l-11.266,11.159L184.914,451.64l-51.658-51.658L275.749,257.483,133.256,114.989l51.658-51.658L327.306,205.725l.054-.054,51.813,51.812Z"></path>
-                </svg>
-            </button>
-            <div class="gallery-dots" id="galleryDots"></div>
+            <div class="gallery-controls">
+                <button class="gallery-nav prev" onclick="prevSlide()" aria-label="Previous slide">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M15 6l-6 6l6 6" />
+                    </svg>
+                </button>
+                <div class="gallery-dots" id="galleryDots"></div>
+                <button class="gallery-nav next" onclick="nextSlide()" aria-label="Next slide">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M9 6l6 6l-6 6" />
+                    </svg>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -1774,20 +1827,34 @@
         <div class="contact-grid">
             <a href="https://discord.com/invite/6FHmryXBbp" target="_blank" class="contact-card">
                 <div class="contact-icon">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M8 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                        <path d="M14 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                        <path d="M15.5 17c0 1 1.5 3 2 3c1.5 0 2.833 -1.667 3.5 -3c.667 -1.667 .5 -5.833 -1.5 -11.5c-1.457 -1.015 -3 -1.34 -4.5 -1.5l-.972 1.923a11.913 11.913 0 0 0 -4.053 0l-.975 -1.923c-1.5 .16 -3.043 .485 -4.5 1.5c-2 5.667 -2.167 9.833 -1.5 11.5c.667 1.333 2 3 3.5 3c.5 0 2 -2 2 -3" />
+                        <path d="M7 16.5c3.5 1 6.5 1 10 0" />
                     </svg>
                 </div>
                 <h3>Discord</h3>
                 <p>Join discord because why not? there is no other way to contact me </p>
             </a>
             <a href="https://t.me/+QQmaL1uuddlkNjQ0" target="_blank" class="contact-card">
-                <div class="contact-icon"><img src="https://github.com/Matko802/M-Server-website/blob/main/logos/telegram%20logo.png?raw=true" alt="Telegram" class="telegram-icon"></div>
+                <div class="contact-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
+                    </svg>
+                </div>
                 <h3>Telegram</h3>
                 <p>Join telegram group chat if you use that instead of discord lol</p>
             </a>
             <a href="https://github.com/Matko802/M-Server-website" target="_blank" class="contact-card">
-                <div class="contact-icon"><img src="https://github.com/Matko802/M-Server-website/blob/main/logos/Octicons-mark-github.svg?raw=true" alt="GitHub"></div>
+                <div class="contact-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+                    </svg>
+                </div>
                 <h3>GitHub</h3>
                 <p>Check the source of this if there isnt any malicious code lol. maybe you will find this text there too :)</p>
             </a>
@@ -1812,8 +1879,11 @@
     <div class="toast" id="toast">IP copied to clipboard!</div>
 
     <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24" fill="white">
-            <polygon points="256 128 448 320 400 368 256 224 112 368 64 320 256 128"/>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 5l0 14" />
+            <path d="M18 11l-6 -6" />
+            <path d="M6 11l6 -6" />
         </svg>
     </button>
 
@@ -1831,7 +1901,7 @@
         const html = document.documentElement;
         
         // Theme states: 'dark', 'light', 'auto'
-        let currentThemeMode = localStorage.getItem('themeMode') || 'dark';
+        let currentThemeMode = localStorage.getItem('themeMode') || 'auto';
 
         function getSystemTheme() {
             return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -2015,6 +2085,187 @@
                 setTimeout(() => this.classList.remove('clicked'), 500);
             });
         });
+
+        // Easter Egg Logic
+        const heroLogo = document.querySelector('.hero-logo');
+        let logoClickCount = 0;
+        let isSpinning = false;
+        let spinSpeed = 2;
+        let isFalling = false;
+        let isBouncing = false;
+        let currentRotation = 0;
+        let animationFrameId;
+        let lastTime;
+
+        function animateLogo(time) {
+            if (!isSpinning || isFalling || isBouncing) return;
+            
+            if (lastTime != null) {
+                const delta = time - lastTime;
+                // spinSpeed is seconds per revolution
+                const rotationSpeed = 360 / (spinSpeed * 1000);
+                currentRotation += rotationSpeed * delta;
+                heroLogo.style.transform = `rotate(${currentRotation}deg)`;
+            }
+            
+            lastTime = time;
+            animationFrameId = requestAnimationFrame(animateLogo);
+        }
+
+        heroLogo.addEventListener('click', () => {
+            if (isFalling || isBouncing) return;
+
+            logoClickCount++;
+
+            if (logoClickCount === 5) {
+                // Start confetti
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+                
+                // Start spinning
+                isSpinning = true;
+                heroLogo.classList.add('spinning');
+                
+                lastTime = null;
+                animationFrameId = requestAnimationFrame(animateLogo);
+            } else if (logoClickCount > 5) {
+                // Accelerate
+                spinSpeed = Math.max(0.1, spinSpeed * 0.7);
+                
+                // Fall down threshold
+                if (logoClickCount >= 15) {
+                    triggerBounceAndFall();
+                }
+            }
+        });
+
+        function triggerBounceAndFall() {
+            isBouncing = true;
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            
+            heroLogo.classList.remove('spinning');
+
+            const rect = heroLogo.getBoundingClientRect();
+            const bounds = {
+                minX: -rect.left,
+                maxX: window.innerWidth - rect.right,
+                minY: -rect.top,
+                maxY: window.innerHeight - rect.bottom
+            };
+
+            let x = 0;
+            let y = 0;
+            // Fast velocity (px/ms)
+            let vx = (Math.random() > 0.5 ? 1 : -1) * (0.8 + Math.random() * 0.5);
+            let vy = (Math.random() > 0.5 ? 1 : -1) * (0.8 + Math.random() * 0.5);
+            
+            let bounceStartTime = null;
+            const bounceDuration = 2000;
+
+            function animateBounce(time) {
+                if (!bounceStartTime) bounceStartTime = time;
+                if (!lastTime) lastTime = time;
+                const delta = time - lastTime;
+                lastTime = time;
+                
+                // Rotation
+                const rotationSpeed = 360 / (spinSpeed * 1000);
+                currentRotation += rotationSpeed * delta;
+
+                // Position
+                x += vx * delta;
+                y += vy * delta;
+
+                // Bounce
+                if (x <= bounds.minX) { x = bounds.minX; vx = -vx; }
+                if (x >= bounds.maxX) { x = bounds.maxX; vx = -vx; }
+                if (y <= bounds.minY) { y = bounds.minY; vy = -vy; }
+                if (y >= bounds.maxY) { y = bounds.maxY; vy = -vy; }
+
+                heroLogo.style.transform = `translate(${x}px, ${y}px) rotate(${currentRotation}deg)`;
+
+                if (time - bounceStartTime < bounceDuration) {
+                    animationFrameId = requestAnimationFrame(animateBounce);
+                } else {
+                    triggerFall(x, y, vx, vy);
+                }
+            }
+            
+            lastTime = performance.now();
+            animationFrameId = requestAnimationFrame(animateBounce);
+        }
+
+        function triggerFall(startX = 0, startY = 0, startVx = 0, startVy = 0) {
+            isBouncing = false;
+            isFalling = true;
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+
+            let startTime = null;
+            const duration = 1000;
+            const rotationSpeed = 360 / (spinSpeed * 1000); // deg per ms
+            
+            let x = startX;
+            let y = startY;
+            let vx = startVx;
+            let vy = startVy;
+            const gravity = 0.002; // px/ms^2
+
+            function animateFall(time) {
+                if (!startTime) startTime = time;
+                if (!lastTime) lastTime = time;
+                const delta = time - lastTime;
+                lastTime = time;
+                
+                const elapsed = time - startTime;
+                
+                if (elapsed < duration) {
+                    // Physics
+                    vy += gravity * delta;
+                    x += vx * delta;
+                    y += vy * delta;
+                    
+                    currentRotation += rotationSpeed * delta;
+                    
+                    const progress = elapsed / duration;
+                    const opacity = 1 - (progress * progress);
+
+                    heroLogo.style.transform = `translate(${x}px, ${y}px) rotate(${currentRotation}deg)`;
+                    heroLogo.style.opacity = opacity;
+                    
+                    animationFrameId = requestAnimationFrame(animateFall);
+                } else {
+                    document.body.classList.add('shake-page');
+                    setTimeout(() => {
+                        document.body.classList.remove('shake-page');
+                        resetLogo();
+                    }, 500);
+                }
+            }
+            
+            animationFrameId = requestAnimationFrame(animateFall);
+        }
+
+        function resetLogo() {
+            heroLogo.classList.add('reappearing');
+            heroLogo.style.transform = '';
+            heroLogo.style.opacity = '';
+            
+            // Reset variables
+            logoClickCount = 0;
+            isSpinning = false;
+            spinSpeed = 2;
+            isFalling = false;
+            isBouncing = false;
+            currentRotation = 0;
+            lastTime = null;
+            
+            setTimeout(() => {
+                heroLogo.classList.remove('reappearing');
+            }, 600);
+        }
     </script>
 </body>
 </html>
