@@ -549,6 +549,7 @@
             padding: 2rem;
             position: relative;
             z-index: 1;
+            gap: 0;
         }
 
         .hero-badge {
@@ -557,10 +558,10 @@
             gap: 0.5rem;
             background: rgba(220, 38, 38, 0.1);
             border: 1px solid var(--primary);
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.9rem;
             border-radius: 50px;
-            margin-bottom: 2rem;
-            font-size: 0.875rem;
+            margin-bottom: 1.25rem;
+            font-size: 0.8rem;
             color: var(--primary);
             font-family: 'JetBrains Mono', monospace;
         }
@@ -579,9 +580,9 @@
         }
 
         .hero-logo {
-            width: 180px;
-            height: 180px;
-            margin-bottom: 1.5rem;
+            width: 140px;
+            height: 140px;
+            margin-bottom: 1rem;
             border-radius: 50%;
             object-fit: cover;
             user-select: none;
@@ -594,9 +595,9 @@
 
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(3rem, 10vw, 6rem);
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 900;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary) 50%, var(--text-primary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -604,58 +605,95 @@
         }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-bottom: 1.25rem;
         }
 
-        .ip-box {
+        .ip-container {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            padding: 1rem 2rem;
+            border-radius: 14px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            max-width: 520px;
+        }
+
+        .ip-row {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 0.75rem;
+            padding: 0.6rem 0;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            transform: translate3d(0, 0, 0);
+            transition: all 0.2s ease;
+            border-radius: 8px;
         }
 
-        .ip-box:hover {
-            transform: scale(1.02) translate3d(0, 0, 0);
-            border-color: var(--primary);
+        .ip-row:hover {
+            background: rgba(220, 38, 38, 0.05);
         }
 
-        .ip-box span {
+        .ip-row + .ip-row {
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .ip-label {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            background: rgba(220, 38, 38, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            flex-shrink: 0;
+            min-width: 62px;
+            text-align: center;
+        }
+
+        .ip-address {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 600;
             color: var(--text-primary);
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .copy-btn {
             background: rgba(220, 38, 38, 0.15);
             border: 1px solid rgba(220, 38, 38, 0.3);
             color: var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
             font-weight: 600;
+            font-size: 0.8rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            transform: translate3d(0, 0, 0);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
         }
 
         .copy-btn:hover {
             background: rgba(220, 38, 38, 0.25);
             border-color: var(--primary);
+        }
+
+        .ip-footer {
+            text-align: center;
+            margin-top: 0.4rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .ip-footer a {
+            color: var(--primary-light);
+            text-decoration: underline;
         }
 
         .hero-buttons {
@@ -1660,9 +1698,18 @@
         <h1>M SERVER</h1>
         <p>Very good server i think or bad? idk anymore :p</p>
         
-        <div class="ip-box" onclick="copyIP()">
-            <span>mode-adds.gl.joinmc.link</span>
-            <button class="copy-btn">Copy IP</button>
+        <div class="ip-container">
+            <div class="ip-row" onclick="copyIP()">
+                <span class="ip-label">☕ Java</span>
+                <span class="ip-address">mode-adds.gl.joinmc.link</span>
+                <button class="copy-btn">Copy</button>
+            </div>
+            <div class="ip-row" onclick="copyBedrockIP()">
+                <span class="ip-label">🪨 Bedrock</span>
+                <span class="ip-address">there-photograph.gl.at.ply.gg:19266</span>
+                <button class="copy-btn">Copy</button>
+            </div>
+            <div class="ip-footer">Portforwarded by <a href="https://playit.gg/" target="_blank" rel="noopener noreferrer">playit.gg</a></div>
         </div>
 
         <div class="hero-buttons">
@@ -1681,10 +1728,10 @@
         
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-icon"><img src="https://minecraft.wiki/images/Cracked_Stone_Bricks_JE3_BE2.png?2e4f2" alt="Cracked" style="width: 48px; height: 48px; image-rendering: pixelated;"></div>
-                <div class="stat-value">Cracked</div>
+                <div class="stat-icon"><img src="https://minecraft.wiki/images/Enchanted_Diamond_Sword.gif" alt="Premium" style="width: 48px; height: 48px; image-rendering: pixelated;"></div>
+                <div class="stat-value">Premium</div>
                 <div class="stat-label">Server Type</div>
-                <div class="stat-sublabel">Free for people that cant afford minecraft how sad</div>
+                <div class="stat-sublabel">Original Minecraft account required to join</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon"><img src="https://minecraft.wiki/images/Enchanted_Iron_Sword.gif?b2d9d" alt="Survival" style="width: 48px; height: 48px; image-rendering: pixelated;"></div>
@@ -1894,6 +1941,17 @@
             const toast = document.getElementById('toast');
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        function copyBedrockIP() {
+            navigator.clipboard.writeText('there-photograph.gl.at.ply.gg');
+            const toast = document.getElementById('toast');
+            toast.textContent = 'Bedrock IP copied to clipboard!';
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.textContent = 'IP copied to clipboard!';
+            }, 2000);
         }
 
         // Theme toggle with 3-state cycle: dark -> light -> auto
