@@ -19,15 +19,15 @@
             --primary: #cc3d4d;
             --primary-dark: #991b1b;
             --primary-light: #e85560;
-            --bg-dark: #150003;
-            --bg-card: #270007;
-            --bg-card-hover: #35000f;
+            --bg-dark: #000000;
+            --bg-card: #000000;
+            --bg-card-hover: #1a1a1a;
             --text-primary: #ffffff;
             --text-secondary: #e0b8c8;
             --border-color: #450016;
             --grid-border: rgba(69, 0, 22, 0.4);
             --grid-hover: rgba(255, 255, 255, 0.9);
-            --scrollbar-track: rgba(21, 0, 3, 0.8);
+            --scrollbar-track: rgba(0, 0, 0, 0.8);
             --scrollbar-thumb: #cc3d4d;
             --scrollbar-thumb-hover: #e85560;
             
@@ -36,24 +36,24 @@
             --nav-padding-h: 2.5rem;
             --nav-gap: 2.5rem;
             
-            --glass-bg: rgba(21, 0, 3, 0.6);
+            --glass-bg: rgba(0, 0, 0, 0.6);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         [data-theme="light"] {
-            --bg-dark: #fff1f4;
-            --bg-card: #fff1f4;
-            --bg-card-hover: #ffe8f0;
+            --bg-dark: #ffffff;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f0f0f0;
             --text-primary: #4c0022;
             --text-secondary: #8b2a52;
             --border-color: #f5c2d8;
-            --grid-border: rgba(245, 194, 216, 0.5);
+            --grid-border: rgba(204, 61, 77, 0.25);
             --grid-hover: rgba(204, 61, 77, 0.6);
-            --scrollbar-track: rgba(255, 241, 244, 0.9);
+            --scrollbar-track: rgba(255, 255, 255, 0.9);
             --scrollbar-thumb: #cc3d4d;
             --scrollbar-thumb-hover: #e85560;
             
-            --glass-bg: rgba(255, 241, 244, 0.8);
+            --glass-bg: rgba(255, 255, 255, 0.9);
             --glass-border: rgba(204, 61, 77, 0.2);
         }
 
@@ -461,6 +461,15 @@
             white-space: nowrap;
         }
 
+        [data-theme="light"] .nav-logo-text {
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
+            color: #000000;
+            animation: none;
+        }
+
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -586,34 +595,6 @@
             filter: brightness(0.9);
         }
 
-        [data-theme="light"] .hero h1 {
-            background: linear-gradient(90deg, #cc3d4d, #e85560, #333333, #e85560, #cc3d4d) !important;
-            -webkit-background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-            background-clip: text !important;
-        }
-
-        [data-theme="light"] .nav-logo-text {
-            background: linear-gradient(90deg, #cc3d4d, #e85560, #333333, #e85560, #cc3d4d) !important;
-            -webkit-background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-            background-clip: text !important;
-        }
-
-        [data-theme="light"] .hero h1 {
-            background: linear-gradient(90deg, #cc3d4d, #e85560, #333333, #e85560, #cc3d4d) !important;
-            -webkit-background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-            background-clip: text !important;
-        }
-
-        [data-theme="light"] .nav-logo-text {
-            background: linear-gradient(90deg, #cc3d4d, #e85560, #333333, #e85560, #cc3d4d) !important;
-            -webkit-background-clip: text !important;
-            -webkit-text-fill-color: transparent !important;
-            background-clip: text !important;
-        }
-
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(2.5rem, 8vw, 5rem);
@@ -625,6 +606,15 @@
             background-clip: text;
             background-size: 200% 100%;
             animation: gradientShift 6s ease-in-out infinite;
+        }
+
+        [data-theme="light"] .hero h1 {
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
+            color: #000000;
+            animation: none;
         }
 
         .hero p {
