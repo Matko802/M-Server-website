@@ -16,45 +16,45 @@
         }
 
         :root {
-            --primary: #dc2626;
+            --primary: #cc3d4d;
             --primary-dark: #991b1b;
-            --primary-light: #ef4444;
-            --bg-dark: #0a0a0a;
-            --bg-card: #141414;
-            --bg-card-hover: #1a1a1a;
+            --primary-light: #e85560;
+            --bg-dark: #150003;
+            --bg-card: #270007;
+            --bg-card-hover: #35000f;
             --text-primary: #ffffff;
-            --text-secondary: #a3a3a3;
-            --border-color: #262626;
-            --grid-border: rgba(50, 50, 50, 0.4);
+            --text-secondary: #e0b8c8;
+            --border-color: #450016;
+            --grid-border: rgba(69, 0, 22, 0.4);
             --grid-hover: rgba(255, 255, 255, 0.9);
-            --scrollbar-track: rgba(20, 20, 20, 0.8);
-            --scrollbar-thumb: #dc2626;
-            --scrollbar-thumb-hover: #ef4444;
+            --scrollbar-track: rgba(21, 0, 3, 0.8);
+            --scrollbar-thumb: #cc3d4d;
+            --scrollbar-thumb-hover: #e85560;
             
             /* Dynamic nav sizing variables */
             --nav-padding-v: 0.85rem;
             --nav-padding-h: 2.5rem;
             --nav-gap: 2.5rem;
             
-            --glass-bg: rgba(20, 20, 20, 0.6);
+            --glass-bg: rgba(21, 0, 3, 0.6);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         [data-theme="light"] {
-            --bg-dark: #f5f5f5;
-            --bg-card: #ffffff;
-            --bg-card-hover: #fafafa;
-            --text-primary: #0a0a0a;
-            --text-secondary: #525252;
-            --border-color: #e5e5e5;
-            --grid-border: rgba(200, 200, 200, 0.5);
-            --grid-hover: rgba(220, 38, 38, 0.6);
-            --scrollbar-track: rgba(240, 240, 240, 0.9);
-            --scrollbar-thumb: #dc2626;
-            --scrollbar-thumb-hover: #991b1b;
+            --bg-dark: #fff1f4;
+            --bg-card: #fff1f4;
+            --bg-card-hover: #ffe8f0;
+            --text-primary: #4c0022;
+            --text-secondary: #8b2a52;
+            --border-color: #f5c2d8;
+            --grid-border: rgba(245, 194, 216, 0.5);
+            --grid-hover: rgba(204, 61, 77, 0.6);
+            --scrollbar-track: rgba(255, 241, 244, 0.9);
+            --scrollbar-thumb: #cc3d4d;
+            --scrollbar-thumb-hover: #e85560;
             
-            --glass-bg: rgba(255, 255, 255, 0.6);
-            --glass-border: rgba(0, 0, 0, 0.1);
+            --glass-bg: rgba(255, 241, 244, 0.8);
+            --glass-border: rgba(204, 61, 77, 0.2);
         }
 
         /* Custom Scrollbar */
@@ -191,10 +191,10 @@
             top: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(20, 20, 20, 0.6);
+            background: var(--glass-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(50, 50, 50, 0.5);
+            border: 1px solid var(--glass-border);
             border-radius: 50px;
             padding: var(--nav-padding-v) var(--nav-padding-h);
             z-index: 1000;
@@ -210,30 +210,19 @@
             white-space: nowrap;
         }
 
-        /* Desktop scrolled state - just shrinks padding/gap, stays floating */
+        /* Desktop scrolled state - stays floating without shrinking */
         .nav-dock.scrolled {
-            --nav-padding-v: 0.6rem;
-            --nav-padding-h: 1.8rem;
-            --nav-gap: 1.8rem;
-            background: rgba(20, 20, 20, 0.95);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
-            border-color: rgba(80, 80, 80, 0.6);
         }
 
         [data-theme="light"] .nav-dock {
-            background: rgba(255, 255, 255, 0.6);
-            border-color: rgba(200, 200, 200, 0.5);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 30px rgba(204, 61, 77, 0.1);
         }
 
         [data-theme="light"] .nav-dock.scrolled {
-            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-            border-color: rgba(200, 200, 200, 0.8);
         }
 
         /* Hamburger Menu Button */
@@ -312,7 +301,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             z-index: 999;
@@ -370,7 +359,7 @@
 
         .mobile-menu ul a:hover {
             color: var(--text-primary);
-            background: rgba(220, 38, 38, 0.1);
+            background: rgba(204, 61, 77, 0.1);
         }
 
         .mobile-menu-actions {
@@ -408,10 +397,7 @@
                 justify-content: space-between;
             }
             
-            .nav-dock.scrolled {
-                padding: 0.6rem 1rem;
-                gap: 0.5rem;
-            }
+
 
             .nav-logo-text {
                 display: none;
@@ -466,7 +452,12 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1rem;
             font-weight: 700;
-            color: var(--primary);
+            background: linear-gradient(90deg, #cc3d4d, #e85560, #ffffff, #e85560, #cc3d4d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 100%;
+            animation: gradientShift 6s ease-in-out infinite;
             white-space: nowrap;
         }
 
@@ -491,22 +482,18 @@
             white-space: nowrap;
         }
 
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
         .nav-actions {
             display: flex;
             align-items: center;
             gap: 1rem;
             margin-left: 1rem;
             padding-left: 1rem;
-            border-left: 1px solid rgba(50, 50, 50, 0.5);
+            border-left: 1px solid var(--border-color);
             flex-shrink: 0;
         }
 
         [data-theme="light"] .nav-actions {
-            border-left-color: rgba(200, 200, 200, 0.5);
+            border-left-color: var(--border-color);
         }
 
         .nav-actions a {
@@ -579,6 +566,12 @@
             50% { opacity: 0.5; transform: scale(1.2); }
         }
 
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .hero-logo {
             width: 140px;
             height: 140px;
@@ -593,15 +586,45 @@
             filter: brightness(0.9);
         }
 
+        [data-theme="light"] .hero h1 {
+            background: linear-gradient(90deg, #cc3d4d, #e85560, #333333, #e85560, #cc3d4d) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+
+        [data-theme="light"] .nav-logo-text {
+            background: linear-gradient(90deg, #cc3d4d, #e85560, #333333, #e85560, #cc3d4d) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+
+        [data-theme="light"] .hero h1 {
+            background: linear-gradient(90deg, #cc3d4d, #e85560, #333333, #e85560, #cc3d4d) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+
+        [data-theme="light"] .nav-logo-text {
+            background: linear-gradient(90deg, #cc3d4d, #e85560, #333333, #e85560, #cc3d4d) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 900;
             margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary) 50%, var(--text-primary) 100%);
+            background: linear-gradient(90deg, #cc3d4d, #e85560, #ffffff, #e85560, #cc3d4d);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            background-size: 200% 100%;
+            animation: gradientShift 6s ease-in-out infinite;
         }
 
         .hero p {
@@ -1606,6 +1629,80 @@
         .shake-page {
             animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
         }
+
+        /* Color Picker Modal */
+        .color-picker-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .color-picker-content {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .color-picker-content h3 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .color-picker-content input[type="color"] {
+            width: 100%;
+            height: 120px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+        }
+
+        .color-picker-content button {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            margin-bottom: 0.75rem;
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .color-picker-content button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .color-picker-content #cancelColorBtn {
+            background: var(--text-secondary);
+            color: var(--bg-dark);
+        }
+
+        .color-picker-content #resetColorBtn {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
     </style>
 </head>
 <body>
@@ -1695,17 +1792,26 @@
 
     <section class="hero" id="home">
         <img src="https://github.com/Matko802/M-Server-website/blob/main/logos/Black%20And%20White%20Modern%20Vintage%20Retro%20Brand%20Logo.png?raw=true" alt="M Server Logo" class="hero-logo" draggable="false" oncontextmenu="return false;">
+        <div id="colorPickerModal" class="color-picker-modal" style="display: none;">
+            <div class="color-picker-content">
+                <h3>Choose Primary Color</h3>
+                <input type="color" id="colorInput" value="#cc3d4d">
+                <button id="applyColorBtn">Apply</button>
+                <button id="cancelColorBtn">Cancel</button>
+                <button id="resetColorBtn">Reset to Default</button>
+            </div>
+        </div>
         <h1>M SERVER</h1>
         <p>Very good server i think or bad? idk anymore :p</p>
         
         <div class="ip-container">
             <div class="ip-row" onclick="copyIP()">
-                <span class="ip-label">☕ Java</span>
+                <span class="ip-label">Java</span>
                 <span class="ip-address">mode-adds.gl.joinmc.link</span>
                 <button class="copy-btn">Copy</button>
             </div>
             <div class="ip-row" onclick="copyBedrockIP()">
-                <span class="ip-label">🪨 Bedrock</span>
+                <span class="ip-label">Bedrock</span>
                 <span class="ip-address">there-photograph.gl.at.ply.gg:19266</span>
                 <button class="copy-btn">Copy</button>
             </div>
@@ -1727,12 +1833,6 @@
         <p class="section-subtitle">Self exple explo expp idk how to say that</p>
         
         <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon"><img src="https://minecraft.wiki/images/Enchanted_Diamond_Sword.gif" alt="Premium" style="width: 48px; height: 48px; image-rendering: pixelated;"></div>
-                <div class="stat-value">Premium</div>
-                <div class="stat-label">Server Type</div>
-                <div class="stat-sublabel">Original Minecraft account required to join</div>
-            </div>
             <div class="stat-card">
                 <div class="stat-icon"><img src="https://minecraft.wiki/images/Enchanted_Iron_Sword.gif?b2d9d" alt="Survival" style="width: 48px; height: 48px; image-rendering: pixelated;"></div>
                 <div class="stat-value">Survival</div>
