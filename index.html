@@ -149,9 +149,11 @@
             flex-shrink: 0;
         }
 
-        .theme-toggle:hover {
-            color: var(--text-primary);
-            transform: scale(1.1);
+        @media (hover: hover) {
+            .theme-toggle:hover {
+                color: var(--text-primary);
+                transform: scale(1.1);
+            }
         }
 
         .theme-toggle svg {
@@ -243,9 +245,11 @@
             transition: color 0.3s, transform 0.2s;
         }
 
-        .hamburger:hover {
-            color: var(--text-primary);
-            transform: scale(1.1);
+        @media (hover: hover) {
+            .hamburger:hover {
+                color: var(--text-primary);
+                transform: scale(1.1);
+            }
         }
 
         .hamburger span {
@@ -357,9 +361,11 @@
             transition: all 0.3s ease;
         }
 
-        .mobile-menu ul a:hover {
-            color: var(--text-primary);
-            background: rgba(204, 61, 77, 0.1);
+        @media (hover: hover) {
+            .mobile-menu ul a:hover {
+                color: var(--text-primary);
+                background: rgba(204, 61, 77, 0.1);
+            }
         }
 
         .mobile-menu-actions {
@@ -375,8 +381,10 @@
             transition: color 0.3s ease;
         }
 
-        .mobile-menu-actions a:hover {
-            color: var(--primary);
+        @media (hover: hover) {
+            .mobile-menu-actions a:hover {
+                color: var(--primary);
+            }
         }
 
         @media (max-width: 768px) {
@@ -400,7 +408,7 @@
 
 
             .nav-logo-text {
-                display: none;
+                display: block;
             }
 
             /* Hide desktop nav-links on mobile - only show in hamburger menu */
@@ -462,12 +470,12 @@
         }
 
         [data-theme="light"] .nav-logo-text {
-            background: none;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: unset;
-            background-clip: unset;
-            color: #000000;
-            animation: none;
+            background: linear-gradient(90deg, #660000, #cc3d4d, #ff6b7a, #cc3d4d, #660000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 100%;
+            animation: gradientShift 6s ease-in-out infinite;
         }
 
         .nav-links {
@@ -609,12 +617,12 @@
         }
 
         [data-theme="light"] .hero h1 {
-            background: none;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: unset;
-            background-clip: unset;
-            color: #000000;
-            animation: none;
+            background: linear-gradient(90deg, #660000, #cc3d4d, #ff6b7a, #cc3d4d, #660000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 100%;
+            animation: gradientShift 6s ease-in-out infinite;
         }
 
         .hero p {
@@ -692,9 +700,11 @@
             flex-shrink: 0;
         }
 
-        .copy-btn:hover {
-            background: rgba(220, 38, 38, 0.25);
-            border-color: var(--primary);
+        @media (hover: hover) {
+            .copy-btn:hover {
+                background: rgba(220, 38, 38, 0.25);
+                border-color: var(--primary);
+            }
         }
 
         .ip-footer {
@@ -741,9 +751,11 @@
             color: var(--primary);
         }
 
-        .btn-primary:hover {
-            background: rgba(220, 38, 38, 0.25);
-            border-color: var(--primary);
+        @media (hover: hover) {
+            .btn-primary:hover {
+                background: rgba(220, 38, 38, 0.25);
+                border-color: var(--primary);
+            }
         }
 
         .btn-secondary {
@@ -752,10 +764,12 @@
             border-color: var(--glass-border);
         }
 
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: rgba(220, 38, 38, 0.1);
+        @media (hover: hover) {
+            .btn-secondary:hover {
+                border-color: var(--primary);
+                color: var(--primary);
+                background: rgba(220, 38, 38, 0.1);
+            }
         }
 
         /* Sections */
@@ -812,8 +826,10 @@
             transform: translate3d(0, 0, 0);
         }
 
-        .stat-card:hover {
-            border-color: var(--primary);
+        @media (hover: hover) {
+            .stat-card:hover {
+                border-color: var(--primary);
+            }
         }
 
         .stat-icon {
@@ -866,8 +882,10 @@
             transform: translate3d(0, 0, 0);
         }
 
-        .plugin-card:hover {
-            border-color: var(--primary);
+        @media (hover: hover) {
+            .plugin-card:hover {
+                border-color: var(--primary);
+            }
         }
 
         .plugin-icon {
@@ -920,8 +938,10 @@
             transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .modrinth-link:hover {
-            transform: scale(1.15);
+        @media (hover: hover) {
+            .modrinth-link:hover {
+                transform: scale(1.15);
+            }
         }
 
         .modrinth-link.clicked {
@@ -966,8 +986,10 @@
             transform: translate3d(0, 0, 0);
         }
 
-        .rule-card:hover {
-            border-color: var(--primary);
+        @media (hover: hover) {
+            .rule-card:hover {
+                border-color: var(--primary);
+            }
         }
 
         .rule-number {
@@ -1021,8 +1043,10 @@
             transform: translate3d(0, 0, 0);
         }
 
-        .contact-card:hover {
-            border-color: var(--primary);
+        @media (hover: hover) {
+            .contact-card:hover {
+                border-color: var(--primary);
+            }
         }
 
         .contact-icon {
@@ -1123,10 +1147,12 @@
             transition: all 0.3s;
         }
 
-        .gallery-nav:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            transform: scale(1.1);
+        @media (hover: hover) {
+            .gallery-nav:hover {
+                background: var(--primary);
+                border-color: var(--primary);
+                transform: scale(1.1);
+            }
         }
 
         .gallery-controls {
@@ -1161,9 +1187,11 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .gallery-slider:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        @media (hover: hover) {
+            .gallery-slider:hover {
+                transform: scale(1.02);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            }
         }
 
 
@@ -1244,10 +1272,12 @@
             transition: all 0.3s ease;
         }
 
-        .lightbox-close:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            transform: scale(1.1);
+        @media (hover: hover) {
+            .lightbox-close:hover {
+                background: var(--primary);
+                border-color: var(--primary);
+                transform: scale(1.1);
+            }
         }
 
         .lightbox-nav {
@@ -1268,9 +1298,11 @@
             transition: all 0.3s ease;
         }
 
-        .lightbox-nav:hover {
-            background: var(--primary);
-            border-color: var(--primary);
+        @media (hover: hover) {
+            .lightbox-nav:hover {
+                background: var(--primary);
+                border-color: var(--primary);
+            }
         }
 
         .lightbox-nav.prev {
@@ -1349,8 +1381,10 @@
             transition: color 0.3s;
         }
 
-        .footer-links a:hover {
-            color: var(--primary);
+        @media (hover: hover) {
+            .footer-links a:hover {
+                color: var(--primary);
+            }
         }
 
         .copyright {
@@ -1555,9 +1589,11 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .scroll-to-top:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        @media (hover: hover) {
+            .scroll-to-top:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            }
         }
 
         .scroll-to-top:active {
@@ -1679,9 +1715,11 @@
             font-family: 'Inter', sans-serif;
         }
 
-        .color-picker-content button:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
+        @media (hover: hover) {
+            .color-picker-content button:hover {
+                opacity: 0.9;
+                transform: translateY(-2px);
+            }
         }
 
         .color-picker-content #cancelColorBtn {
@@ -1706,10 +1744,11 @@
         </div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
+            <li><a href="#gallery">Server Preview</a></li>
             <li><a href="#info">Server Info</a></li>
-            <li><a href="#plugins">Plugins</a></li>
             <li><a href="#rules">Rules</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="https://raspberrypi.tail40c599.ts.net" target="_blank">Dynmap</a></li>
         </ul>
         <div class="nav-actions">
             <a href="https://discord.com/invite/6FHmryXBbp" target="_blank" title="Discord">
@@ -1756,10 +1795,11 @@
     <div class="mobile-menu" id="mobileMenu">
         <ul>
             <li><a href="#home">Home</a></li>
+            <li><a href="#gallery">Server Preview</a></li>
             <li><a href="#info">Server Info</a></li>
-            <li><a href="#plugins">Plugins</a></li>
             <li><a href="#rules">Rules</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="https://raspberrypi.tail40c599.ts.net" target="_blank">Dynmap</a></li>
         </ul>
         <div class="mobile-menu-actions">
             <a href="https://discord.com/invite/6FHmryXBbp" target="_blank" title="Discord">
@@ -1812,62 +1852,9 @@
             <a href="https://discord.com/invite/6FHmryXBbp" target="_blank" class="btn btn-primary">
                 Join Discord
             </a>
-            <a href="#info" class="btn btn-secondary">
+            <a href="#gallery" class="btn btn-secondary">
                 Learn More
             </a>
-        </div>
-    </section>
-
-    <section id="info">
-        <h2 class="section-title">Server Information</h2>
-        <p class="section-subtitle">Self exple explo expp idk how to say that</p>
-        
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon"><img src="https://minecraft.wiki/images/Enchanted_Iron_Sword.gif?b2d9d" alt="Survival" style="width: 48px; height: 48px; image-rendering: pixelated;"></div>
-                <div class="stat-value">Survival</div>
-                <div class="stat-label">Game Mode</div> 
-                <div class="stat-sublabel">Paper vannila like survival qol plugins</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><img src="https://www.minecartrapidtransit.net/wp-content/uploads/2023/11/minecraft-icon.webp" alt="Minecraft" style="width: 48px; height: 48px; object-fit: contain;"></div>
-                <div class="stat-value">1.21.11</div>
-                <div class="stat-label">Version (ViaVersion - Any version works)</div>
-                <div class="stat-sublabel">Some versions are unusable tho like 1.8.9</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><img src="https://minecraft.wiki/images/Clock_JE3_BE3.gif?8eaae" alt="Clock" style="width: 48px; height: 48px; image-rendering: pixelated;"></div>
-                <div class="stat-value">80%</div>
-                <div class="stat-label">Uptime</div>
-                <div class="stat-sublabel">I'll try to keep it up as much as possible cuz parents turn off wifi in night sadly</div>
-        </div>
-    </section>
-
-    <section id="plugins">
-        <h2 class="section-title">Featured Plugins</h2>
-        <p class="section-subtitle">I thought that they were important to feature them here</p>
-        
-        <div class="plugins-grid">
-            <div class="plugin-card">
-                <div class="plugin-icon" style="position: relative;">
-                    <img src="https://cdn.modrinth.com/data/XRJBgd3p/db7891181c738f4fa5adfce0ae13aa93cda987e9_96.webp" alt="NoChatReports" style="width: 48px; height: 48px; border-radius: 8px;">
-                    <a href="https://modrinth.com/plugin/nochatreports-spigot-paper" target="_blank" rel="noopener noreferrer" title="View on Modrinth" class="modrinth-link">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Modrinth_Logo.webp/128px-Modrinth_Logo.webp.png?20241118175224" alt="Modrinth">
-                    </a>
-                </div>
-                <h3>NoChatReports</h3>
-                <p>Your chat messages are protected! This plugin prevents chat reporting, ensuring your privacy and freedom of expression while playing on our server.</p>
-            </div>
-            <div class="plugin-card">
-                <div class="plugin-icon" style="position: relative;">
-                    <img src="https://cdn.modrinth.com/data/9eGKb6K1/icon.png" alt="Simple Voice Chat" style="width: 48px; height: 48px; border-radius: 8px;">
-                    <a href="https://modrinth.com/plugin/simple-voice-chat" target="_blank" rel="noopener noreferrer" title="View on Modrinth" class="modrinth-link">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Modrinth_Logo.webp/128px-Modrinth_Logo.webp.png?20241118175224" alt="Modrinth">
-                    </a>
-                </div>
-                <h3>Simple Voice Chat</h3>
-                <p>Talk with nearby players using proximity voice chat! Communicate naturally with friends and coordinate better during your adventures.</p>
-            </div>
         </div>
     </section>
 
@@ -1904,6 +1891,31 @@
                     </svg>
                 </button>
             </div>
+        </div>
+    </section>
+
+    <section id="info">
+        <h2 class="section-title">Server Information</h2>
+        <p class="section-subtitle">Self exple explo expp idk how to say that</p>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><img src="https://minecraft.wiki/images/Enchanted_Iron_Sword.gif?b2d9d" alt="Survival" style="width: 48px; height: 48px; image-rendering: pixelated;"></div>
+                <div class="stat-value">Survival</div>
+                <div class="stat-label">Game Mode</div> 
+                <div class="stat-sublabel">Paper vannila like survival qol plugins</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><img src="https://www.minecartrapidtransit.net/wp-content/uploads/2023/11/minecraft-icon.webp" alt="Minecraft" style="width: 48px; height: 48px; object-fit: contain;"></div>
+                <div class="stat-value">1.21.11</div>
+                <div class="stat-label">Version (ViaVersion - Any version works)</div>
+                <div class="stat-sublabel">Some versions are unusable tho like 1.8.9</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><img src="https://minecraft.wiki/images/Clock_JE3_BE3.gif?8eaae" alt="Clock" style="width: 48px; height: 48px; image-rendering: pixelated;"></div>
+                <div class="stat-value">80%</div>
+                <div class="stat-label">Uptime</div>
+                <div class="stat-sublabel">I'll try to keep it up as much as possible cuz parents turn off wifi in night sadly</div>
         </div>
     </section>
 
@@ -2005,8 +2017,8 @@
         </div>
         <div class="footer-links">
             <a href="#home">Home</a>
+            <a href="#gallery">Server Preview</a>
             <a href="#info">Server Info</a>
-            <a href="#plugins">Plugins</a>
             <a href="#rules">Rules</a>
             <a href="#contact">Contact</a>
         </div>
@@ -2025,16 +2037,41 @@
     </button>
 
     <script>
+        // ============================================================
+        // SITE CONFIGURATION - Update these values to change site text
+        // All values here are used throughout the website automatically
+        // Change a value once here and it updates everywhere!
+        // ============================================================
+        const SITE_CONFIG = {
+            // Section names (update here to change everywhere)
+            sections: {
+                gallery: { id: 'gallery', title: 'Preview' },
+                info: { id: 'info', title: 'Info' },
+                rules: { id: 'rules', title: 'Rules' },
+                contact: { id: 'contact', title: 'Join us' }
+            },
+            
+            // Server IPs
+            server: {
+                javaIP: 'mode-adds.gl.joinmc.link',
+                bedrockIP: 'there-photograph.gl.at.ply.gg',
+                dynmapURL: 'https://raspberrypi.tail40c599.ts.net',
+                discordURL: 'https://discord.com/invite/6FHmryXBbp',
+                githubURL: 'https://github.com/Matko802/M-Server-website'
+            }
+        };
+        // ============================================================
+
         // Copy IP function
         function copyIP() {
-            navigator.clipboard.writeText('mode-adds.gl.joinmc.link');
+            navigator.clipboard.writeText(SITE_CONFIG.server.javaIP);
             const toast = document.getElementById('toast');
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2000);
         }
 
         function copyBedrockIP() {
-            navigator.clipboard.writeText('there-photograph.gl.at.ply.gg');
+            navigator.clipboard.writeText(SITE_CONFIG.server.bedrockIP);
             const toast = document.getElementById('toast');
             toast.textContent = 'Bedrock IP copied to clipboard!';
             toast.classList.add('show');
@@ -2068,6 +2105,19 @@
 
         function initTheme() {
             applyTheme(currentThemeMode);
+        }
+
+        // Initialize section titles from config
+        function initSectionTitles() {
+            Object.entries(SITE_CONFIG.sections).forEach(([key, section]) => {
+                const sectionElement = document.getElementById(section.id);
+                if (sectionElement) {
+                    const titleElement = sectionElement.querySelector('.section-title');
+                    if (titleElement) {
+                        titleElement.textContent = section.title;
+                    }
+                }
+            });
         }
 
         themeToggle.addEventListener('click', () => {
@@ -2149,6 +2199,7 @@
 
         // Initialize
         initTheme();
+        initSectionTitles();
         createDots();
 
         // Scroll detection for dynamic nav resize
