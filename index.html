@@ -30,12 +30,12 @@
             --scrollbar-track: rgba(0, 0, 0, 0.8);
             --scrollbar-thumb: #cc3d4d;
             --scrollbar-thumb-hover: #e85560;
-            
+
             /* Dynamic nav sizing variables */
             --nav-padding-v: 0.85rem;
             --nav-padding-h: 2.5rem;
             --nav-gap: 2.5rem;
-            
+
             --glass-bg: rgba(0, 0, 0, 0.6);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
@@ -52,7 +52,7 @@
             --scrollbar-track: rgba(255, 255, 255, 0.9);
             --scrollbar-thumb: #cc3d4d;
             --scrollbar-thumb-hover: #e85560;
-            
+
             --glass-bg: rgba(255, 255, 255, 0.9);
             --glass-border: rgba(204, 61, 77, 0.2);
         }
@@ -118,7 +118,7 @@
             left: 0;
             width: 100%;
             height: calc(100% + 80px);
-            background-image: 
+            background-image:
                 linear-gradient(var(--grid-border) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-border) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -404,7 +404,7 @@
                 gap: 0.5rem;
                 justify-content: space-between;
             }
-            
+
 
 
             .nav-logo-text {
@@ -600,7 +600,11 @@
         }
 
         [data-theme="light"] .hero-logo {
-            filter: brightness(0.9);
+            filter: invert(1) brightness(1.2);
+        }
+
+        [data-theme="light"] .nav-logo img {
+            filter: invert(1) brightness(1.2);
         }
 
         .hero h1 {
@@ -728,7 +732,7 @@
 
         .btn {
             padding: 1rem 2rem;
-            border-radius: 12px;
+            border-radius: 9999px;
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
@@ -1744,10 +1748,10 @@
         </div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
-            <li><a href="#gallery">Server Preview</a></li>
-            <li><a href="#info">Server Info</a></li>
+            <li><a href="#gallery">Preview</a></li>
+            <li><a href="#info">Info</a></li>
             <li><a href="#rules">Rules</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact">Join us</a></li>
             <li><a href="https://raspberrypi.tail40c599.ts.net" target="_blank">Dynmap</a></li>
         </ul>
         <div class="nav-actions">
@@ -1795,10 +1799,10 @@
     <div class="mobile-menu" id="mobileMenu">
         <ul>
             <li><a href="#home">Home</a></li>
-            <li><a href="#gallery">Server Preview</a></li>
-            <li><a href="#info">Server Info</a></li>
+            <li><a href="#gallery">Preview</a></li>
+            <li><a href="#info">Info</a></li>
             <li><a href="#rules">Rules</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact">Join us</a></li>
             <li><a href="https://raspberrypi.tail40c599.ts.net" target="_blank">Dynmap</a></li>
         </ul>
         <div class="mobile-menu-actions">
@@ -1833,7 +1837,7 @@
         </div>
         <h1>M SERVER</h1>
         <p>Very good server i think or bad? idk anymore :p</p>
-        
+
         <div class="ip-container">
             <div class="ip-row" onclick="copyIP()">
                 <span class="ip-label">Java</span>
@@ -1861,18 +1865,24 @@
     <section id="gallery">
         <h2 class="section-title">Server Preview</h2>
         <p class="section-subtitle">Check out these cool screenshots of server and very cool video
-        
+
         <div class="gallery-container" id="galleryContainer">
             <div class="gallery-slider" id="gallerySlider">
                 <div class="gallery-track" id="galleryTrack">
                     <div class="gallery-slide video-slide" data-video="true">
-                        <iframe src="https://www.youtube.com/watch?v=dNezL8Gr1ro" title="Server Preview Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/dNezL8Gr1ro" title="Server Preview Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                     <div class="gallery-slide">
-                        <img src="https://github.com/Matko802/M-Server-website/blob/main/Screenshots/huge_2026-01-17_10.28.49.png?raw=true" alt="Server Screenshot 1">
+                        <img src="https://github.com/Matko802/M-Server-website/blob/main/Screenshots/M%20Server%20trailer-f000400.png?raw=true" alt="Server Screenshot 1">
                     </div>
                     <div class="gallery-slide">
-                        <img src="https://github.com/Matko802/M-Server-website/blob/main/Screenshots/huge_2026-01-18_09.53.43.png?raw=true" alt="Server Screenshot 2">
+                        <img src="https://github.com/Matko802/M-Server-website/blob/main/Screenshots/M%20Server%20trailer-f009790.png?raw=true" alt="Server Screenshot 2">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="https://github.com/Matko802/M-Server-website/blob/main/Screenshots/M%20Server%20trailer-f011762.png?raw=true" alt="Server Screenshot 3">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="https://github.com/Matko802/M-Server-website/blob/main/Screenshots/M%20Server%20trailer-f001177.png?raw=true" alt="Server Screenshot 4">
                     </div>
                 </div>
             </div>
@@ -1897,12 +1907,12 @@
     <section id="info">
         <h2 class="section-title">Server Information</h2>
         <p class="section-subtitle">Self exple explo expp idk how to say that</p>
-        
+
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-icon"><img src="https://minecraft.wiki/images/Enchanted_Iron_Sword.gif?b2d9d" alt="Survival" style="width: 48px; height: 48px; image-rendering: pixelated;"></div>
                 <div class="stat-value">Survival</div>
-                <div class="stat-label">Game Mode</div> 
+                <div class="stat-label">Game Mode</div>
                 <div class="stat-sublabel">Paper vannila like survival qol plugins</div>
             </div>
             <div class="stat-card">
@@ -1922,7 +1932,7 @@
     <section id="rules">
         <h2 class="section-title">Server Rules</h2>
         <p class="section-subtitle">Just follow these rules cuz I am too lazy to moderate</p>
-        
+
         <div class="rules-grid">
             <div class="rule-card">
                 <div class="rule-number">1</div>
@@ -1972,7 +1982,7 @@
     <section id="contact">
         <h2 class="section-title">Join Our Community</h2>
         <p class="section-subtitle">Please share to more people so this server gets popular</p>
-        
+
         <div class="contact-grid">
             <a href="https://discord.com/invite/6FHmryXBbp" target="_blank" class="contact-card">
                 <div class="contact-icon">
@@ -2022,7 +2032,7 @@
             <a href="#rules">Rules</a>
             <a href="#contact">Contact</a>
         </div>
-        <p class="copyright">© 2026 M Server. All rights reserved.</p>
+        <p class="copyright">© 2026 M Server. Licensed under MIT.</p>
     </footer>
 
     <div class="toast" id="toast">IP copied to clipboard!</div>
@@ -2050,7 +2060,7 @@
                 rules: { id: 'rules', title: 'Rules' },
                 contact: { id: 'contact', title: 'Join us' }
             },
-            
+
             // Server IPs
             server: {
                 javaIP: 'mode-adds.gl.joinmc.link',
@@ -2084,7 +2094,7 @@
         // Theme toggle with 3-state cycle: dark -> light -> auto
         const themeToggle = document.getElementById('themeToggle');
         const html = document.documentElement;
-        
+
         // Theme states: 'dark', 'light', 'auto'
         let currentThemeMode = localStorage.getItem('themeMode') || 'auto';
 
@@ -2094,7 +2104,7 @@
 
         function applyTheme(mode) {
             html.removeAttribute('data-theme-mode');
-            
+
             if (mode === 'auto') {
                 html.setAttribute('data-theme-mode', 'auto');
                 html.setAttribute('data-theme', getSystemTheme());
@@ -2129,7 +2139,7 @@
             } else {
                 currentThemeMode = 'dark';
             }
-            
+
             localStorage.setItem('themeMode', currentThemeMode);
             applyTheme(currentThemeMode);
         });
@@ -2205,7 +2215,7 @@
         // Scroll detection for dynamic nav resize
         const navDock = document.getElementById('navDock');
         let lastScrollY = window.scrollY;
-        
+
         function handleScroll() {
             const scrollY = window.scrollY;
             if (scrollY > 50) {
@@ -2298,7 +2308,7 @@
 
         function animateLogo(time) {
             if (!isSpinning || isFalling || isBouncing) return;
-            
+
             if (lastTime != null) {
                 const delta = time - lastTime;
                 // spinSpeed is seconds per revolution
@@ -2306,7 +2316,7 @@
                 currentRotation += rotationSpeed * delta;
                 heroLogo.style.transform = `rotate(${currentRotation}deg)`;
             }
-            
+
             lastTime = time;
             animationFrameId = requestAnimationFrame(animateLogo);
         }
@@ -2323,17 +2333,17 @@
                     spread: 70,
                     origin: { y: 0.6 }
                 });
-                
+
                 // Start spinning
                 isSpinning = true;
                 heroLogo.classList.add('spinning');
-                
+
                 lastTime = null;
                 animationFrameId = requestAnimationFrame(animateLogo);
             } else if (logoClickCount > 5) {
                 // Accelerate
                 spinSpeed = Math.max(0.1, spinSpeed * 0.7);
-                
+
                 // Fall down threshold
                 if (logoClickCount >= 15) {
                     triggerBounceAndFall();
@@ -2344,7 +2354,7 @@
         function triggerBounceAndFall() {
             isBouncing = true;
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
-            
+
             heroLogo.classList.remove('spinning');
 
             const rect = heroLogo.getBoundingClientRect();
@@ -2360,7 +2370,7 @@
             // Fast velocity (px/ms)
             let vx = (Math.random() > 0.5 ? 1 : -1) * (0.8 + Math.random() * 0.5);
             let vy = (Math.random() > 0.5 ? 1 : -1) * (0.8 + Math.random() * 0.5);
-            
+
             let bounceStartTime = null;
             const bounceDuration = 2000;
 
@@ -2369,7 +2379,7 @@
                 if (!lastTime) lastTime = time;
                 const delta = time - lastTime;
                 lastTime = time;
-                
+
                 // Rotation
                 const rotationSpeed = 360 / (spinSpeed * 1000);
                 currentRotation += rotationSpeed * delta;
@@ -2392,7 +2402,7 @@
                     triggerFall(x, y, vx, vy);
                 }
             }
-            
+
             lastTime = performance.now();
             animationFrameId = requestAnimationFrame(animateBounce);
         }
@@ -2405,7 +2415,7 @@
             let startTime = null;
             const duration = 1000;
             const rotationSpeed = 360 / (spinSpeed * 1000); // deg per ms
-            
+
             let x = startX;
             let y = startY;
             let vx = startVx;
@@ -2417,23 +2427,23 @@
                 if (!lastTime) lastTime = time;
                 const delta = time - lastTime;
                 lastTime = time;
-                
+
                 const elapsed = time - startTime;
-                
+
                 if (elapsed < duration) {
                     // Physics
                     vy += gravity * delta;
                     x += vx * delta;
                     y += vy * delta;
-                    
+
                     currentRotation += rotationSpeed * delta;
-                    
+
                     const progress = elapsed / duration;
                     const opacity = 1 - (progress * progress);
 
                     heroLogo.style.transform = `translate(${x}px, ${y}px) rotate(${currentRotation}deg)`;
                     heroLogo.style.opacity = opacity;
-                    
+
                     animationFrameId = requestAnimationFrame(animateFall);
                 } else {
                     document.body.classList.add('shake-page');
@@ -2443,7 +2453,7 @@
                     }, 500);
                 }
             }
-            
+
             animationFrameId = requestAnimationFrame(animateFall);
         }
 
@@ -2451,7 +2461,7 @@
             heroLogo.classList.add('reappearing');
             heroLogo.style.transform = '';
             heroLogo.style.opacity = '';
-            
+
             // Reset variables
             logoClickCount = 0;
             isSpinning = false;
@@ -2460,7 +2470,7 @@
             isBouncing = false;
             currentRotation = 0;
             lastTime = null;
-            
+
             setTimeout(() => {
                 heroLogo.classList.remove('reappearing');
             }, 600);
