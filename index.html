@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M Server - Minecraft Server</title>
+    <title>Server - Minecraft Server</title>
     <meta name="description" content="Join the M Server Minecraft Server, a vanilla-like survival experience!">
     <link rel="icon" href="https://github.com/Matko802/M-Server-website/blob/main/logos/Mserverlogo.png?raw=true" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -331,9 +331,42 @@
             background: var(--bg-card);
             border-left: 1px solid var(--border-color);
             z-index: 1001;
-            padding: 5rem 2rem 2rem;
+            padding: 0.75rem 1rem 2rem;
             transition: right 0.3s ease;
             overflow-y: auto;
+        }
+
+        .mobile-menu-close {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 1rem;
+        }
+
+        .mobile-menu-close button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .mobile-menu-close button svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        @media (hover: hover) {
+            .mobile-menu-close button:hover {
+                color: var(--text-primary);
+                transform: scale(1.1);
+            }
         }
 
         .mobile-menu.active {
@@ -387,6 +420,65 @@
             }
         }
 
+        /* Mobile layout - applied via JS class instead of media query */
+        .nav-dock.mobile-mode {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            transform: none;
+            width: 100%;
+            max-width: 100%;
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+            padding: 0.75rem 1rem;
+            gap: 0.5rem;
+            justify-content: space-between;
+        }
+
+        .nav-dock.mobile-mode .nav-logo-text {
+            display: block;
+        }
+
+        .nav-dock.mobile-mode .nav-links {
+            display: none !important;
+        }
+
+        .nav-dock.mobile-mode .nav-actions {
+            gap: 0.75rem;
+            border-left: none;
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+        .nav-dock.mobile-mode .hamburger {
+            display: flex;
+        }
+
+        .mobile-mode ~ .mobile-menu-overlay {
+            display: block;
+        }
+
+        .mobile-mode ~ .mobile-menu-overlay ~ .mobile-menu {
+            display: block;
+        }
+
+        body.is-mobile .mobile-menu-overlay {
+            display: block;
+        }
+
+        body.is-mobile .mobile-menu {
+            display: block;
+        }
+
+        body.is-mobile .hero {
+            min-height: calc(100vh - 60px);
+            padding-top: 1rem;
+        }
+
+        /* Keep media query as fallback for very small screens */
         @media (max-width: 768px) {
             .nav-dock {
                 position: sticky;
@@ -405,13 +497,10 @@
                 justify-content: space-between;
             }
 
-
-
             .nav-logo-text {
                 display: block;
             }
 
-            /* Hide desktop nav-links on mobile - only show in hamburger menu */
             .nav-links {
                 display: none !important;
             }
@@ -435,7 +524,6 @@
                 display: block;
             }
 
-            /* Adjust hero section */
             .hero {
                 min-height: calc(100vh - 60px);
                 padding-top: 1rem;
@@ -603,7 +691,8 @@
             filter: invert(1) brightness(1.2);
         }
 
-        [data-theme="light"] .nav-logo img {
+        [data-theme="light"] .nav-logo img,
+        [data-theme="light"] .footer-logo img {
             filter: invert(1) brightness(1.2);
         }
 
@@ -682,13 +771,13 @@
 
         .ip-address {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-primary);
             flex: 1;
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            overflow: visible;
+            min-width: 0;
         }
 
         .copy-btn {
@@ -1577,9 +1666,10 @@
             right: 2rem;
             width: 50px;
             height: 50px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border: none;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
             border-radius: 50%;
             cursor: pointer;
             display: flex;
@@ -1590,13 +1680,12 @@
             visibility: hidden;
             transform: translateY(20px);
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         @media (hover: hover) {
             .scroll-to-top:hover {
+                border-color: var(--primary);
                 transform: translateY(-3px);
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
             }
         }
 
@@ -1797,6 +1886,14 @@
     <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
     <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-close">
+            <button onclick="closeMobileMenu()" aria-label="Close menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6L6 18" />
+                    <path d="M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
         <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#gallery">Preview</a></li>
@@ -2023,7 +2120,7 @@
     <footer>
         <div class="footer-logo">
             <img src="https://github.com/Matko802/M-Server-website/blob/main/logos/Mserverlogo.png?raw=true" alt="M Server Logo">
-            <span class="footer-logo-text">M Server</span>
+            <span class="footer-logo-text">Server</span>
         </div>
         <div class="footer-links">
             <a href="#home">Home</a>
@@ -2064,7 +2161,7 @@
             // Server IPs
             server: {
                 javaIP: 'mode-adds.gl.joinmc.link',
-                bedrockIP: 'there-photograph.gl.at.ply.gg',
+                bedrockIP: 'there-photograph.gl.at.ply.gg:19266',
                 dynmapURL: 'https://raspberrypi.tail40c599.ts.net',
                 discordURL: 'https://discord.com/invite/6FHmryXBbp',
                 githubURL: 'https://github.com/Matko802/M-Server-website'
@@ -2102,15 +2199,53 @@
             return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
 
+        function updateFavicon(theme) {
+            const faviconLink = document.querySelector('link[rel="icon"]');
+            const logoUrl = 'https://github.com/Matko802/M-Server-website/blob/main/logos/Mserverlogo.png?raw=true';
+
+            if (theme === 'light') {
+                // Draw inverted favicon via canvas
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 64;
+                    canvas.height = 64;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, 64, 64);
+                    ctx.globalCompositeOperation = 'difference';
+                    ctx.fillStyle = 'white';
+                    ctx.fillRect(0, 0, 64, 64);
+                    faviconLink.href = canvas.toDataURL('image/png');
+                };
+                img.src = logoUrl;
+            } else {
+                faviconLink.href = logoUrl;
+            }
+        }
+
         function applyTheme(mode) {
             html.removeAttribute('data-theme-mode');
 
+            let resolvedTheme;
             if (mode === 'auto') {
                 html.setAttribute('data-theme-mode', 'auto');
-                html.setAttribute('data-theme', getSystemTheme());
+                resolvedTheme = getSystemTheme();
+                html.setAttribute('data-theme', resolvedTheme);
             } else {
+                resolvedTheme = mode;
                 html.setAttribute('data-theme', mode);
             }
+            updateFavicon(resolvedTheme);
+
+            // Apply invert filter to logos dynamically
+            const invertFilter = resolvedTheme === 'light' ? 'invert(1) brightness(1.2)' : 'none';
+            const navLogoImg = document.querySelector('.nav-logo img');
+            const footerLogoImg = document.querySelector('.footer-logo img');
+            const heroLogo = document.querySelector('.hero-logo');
+            if (navLogoImg) navLogoImg.style.filter = invertFilter;
+            if (footerLogoImg) footerLogoImg.style.filter = invertFilter;
+            if (heroLogo) heroLogo.style.filter = invertFilter;
         }
 
         function initTheme() {
@@ -2206,6 +2341,26 @@
 
         // Fullscreen / lightbox removed (requested)
 
+
+        // Mobile detection - uses touch capability + user agent, not viewport width
+        function isMobileDevice() {
+            const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            const mobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            return hasTouch && mobileUA;
+        }
+
+        function applyMobileMode() {
+            const navDock = document.getElementById('navDock');
+            if (isMobileDevice()) {
+                navDock.classList.add('mobile-mode');
+                document.body.classList.add('is-mobile');
+            } else {
+                navDock.classList.remove('mobile-mode');
+                document.body.classList.remove('is-mobile');
+            }
+        }
+
+        applyMobileMode();
 
         // Initialize
         initTheme();
